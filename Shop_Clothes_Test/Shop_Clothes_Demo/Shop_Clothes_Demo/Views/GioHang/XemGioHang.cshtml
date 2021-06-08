@@ -1,0 +1,114 @@
+﻿@using Shop_Clothes_Demo.Models;
+@model IEnumerable<ItemGioHang>
+@{
+    ViewBag.Title = "XemGioHang";
+    Layout = "~/Views/Shared/_LayoutOverView.cshtml";
+    Decimal tongTien = Convert.ToDecimal(ViewBag.TongTien) + 25000;
+}
+
+
+<link href="~/Content/Details/css/stylede.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="~/Content/Details/css/etalage.css">
+<script src="~/Content/Details/js/jquery.etalage.min.js"></script>
+<script src="~/Content/Details/js/jquery.easydropdown.js"></script>
+
+<div class="container">
+    <div class="check">
+        <div class="col-md-9 cart-items">
+            <h1>Giỏ Hàng (@Model.Count())</h1>
+
+            @foreach (var item in Model)
+            {
+                <script>
+                    $(document).ready(function (c) {
+                        $('.@item.MaSP').on('click', function (c) {
+                            $('._@item.MaSP').fadeOut('slow', function (c) {
+                                $('._@item.MaSP').remove();
+                            });
+                        });
+                    });
+                </script>
+                @*cart - header*@
+
+                <div class="_@item.MaSP" style="position: relative;">
+                    <a href="@Url.Action("XoaItemGioHang", "GioHang", new { @MaSanPham = item.MaSP, @size = item.Size })">
+                        <div class="@item.MaSP.ToString()" style="background: url('/Content/Details/images/close_1.png') no-repeat 0px 0px; cursor: pointer; width: 28px; height: 28px; position: absolute; right: 0px; top: 0px; -webkit-transition: color 0.2s ease-in-out; -moz-transition: color 0.2s ease-in-out; -o-transition: color 0.2s ease-in-out; transition: color 0.2s ease-in-out;"> </div>
+                    </a>
+                    <div class="cart-sec simpleCart_shelfItem">
+                        <div class="cart-item cyc">
+                            <a href="@Url.Action("Details", "SanPham", new { MaSanPham = item.MaSP })">
+                            <img style="height: 200px; width: 210px;" src="@Url.Content("~/Content/SanPham/" + item.HinhAnh + ".jpg")" class="img-responsive" alt="">
+                            </a>
+                            
+                        </div>
+                        <div class="cart-item-info">
+                            <h3><a href="@Url.Action("Details", "SanPham", new { MaSanPham = item.MaSP })">@item.TenSP</a><span>Mã: @item.MaSP</span></h3>
+                            <ul class="qty">
+                                <li><p>Size : @item.Size</p></li>
+                            </ul>
+                            <p>Số lượng: </p>
+                            @using (Html.BeginForm("CapNhatSoLuong", "GioHang", new { @MaSanPham = item.MaSP, @size = item.Size, @strURL = Request.Url.ToString() }))
+                            {
+                                <input name="SoLuongSP" style="float: left; width: 35%;" type="number" value="@item.SoLuong" min="1" max="100" />
+                                <div class="clearfix"></div>
+                                <input type="submit" value="Cập nhật" />
+                                <div class="clearfix"></div>
+                            }
+                            @* <input name="SoLuongSP" style="float: left; width: 35%;" type="number" value="@item.SoLuong" min="1" max="100" />
+        <div class="clearfix"></div>
+        <a href="@Url.Action("CapNhatSoLuong", "GioHang", new { @MaSanPham=item.MaSP, @size=item.Size, @strURL=Request.Url.ToString()})">
+            <input type="submit" value="Cập nhật" />
+        </a>*@
+
+                            <div class="delivery">
+                                <p>Giá : @item.DonGia đ</p>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="col-md-3 cart-total">
+            <a class="continue" href="~/Intro/Index">Tiếp tục mua sắm</a>
+            <div class="price-details">
+                <h2>Hóa đơn</h2>
+                <h3>Tổng: @ViewBag.TongTien đ</h3>
+                <span class="total1"></span>
+                <h3>Mã Giảm Giá:</h3>
+                <h3 >---</h3>
+                <h3>Phí giao hàng:</h3>
+                <h3>25000đ</h3>
+                <div class="clearfix"></div>
+            </div>
+            <ul class="total_price">
+                <li class="last_price"> <h4>TỔNG</h4></li>
+                <li class="last_price"><span>@tongTien đ</span></li>
+                <div class="clearfix"> </div>
+            </ul>
+
+
+            <div class="clearfix"></div>
+            <a class="order" href="@Url.Action("ThanhToan", "GioHang")">Đặt Hàng</a>
+            <div class="total-item">
+                <h3>Lựa Chọn</h3>
+                <h4>Mã:</h4>
+                @{
+                    if (Session["username"] != null)
+                    {
+                        <a class="cpns" href="">Chọn mã giảm giá</a>
+                    }
+                    else
+                    {
+                        <a class="cpns" href="">Đăng nhập để lấy mã giảm giá</a>
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

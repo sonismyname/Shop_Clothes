@@ -1,0 +1,204 @@
+﻿@using PagedList.Mvc
+@using Shop_Clothes_Demo.Models
+@model PagedList.IPagedList<Shop_Clothes_Demo.Models.SanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutOverView.cshtml";
+}
+@{
+    IEnumerable<SanPham> list = (IEnumerable<SanPham>)ViewBag.list;
+}
+@*<div class="container">
+    <div class="col-md-9">
+            <div class="texthead">
+                <h1>Bán chạy nhất<h1>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="#">
+                    </a><div class="product2">
+                        <a href="#">
+                            <div class="img3"> <img src="image/03_01-210x327.jpg"> </div>
+                        </a><div class="text2">
+                            <a href="#"> </a><a href="#"><h5>Loraem Ipsum Dollar</h5></a>
+                            <h3>Giá: 95.6 <del style="font-size: 12px;">Giá: 110.00</del></h3>
+                            <button class="button1 button2">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <a href="#">
+                    </a><div class="product2">
+                        <a href="#">
+                            <div class="img3"> <img src="image/03_01-210x327.jpg"> </div>
+                        </a><div class="text2">
+                            <a href="#"> </a><a href="#"><h5>Loraem Ipsum Dollar</h5></a>
+                            <h3>Giá: 95.6</h3>
+                            <button class="button1 button2">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <a href="#">
+                    </a><div class="product2">
+                        <a href="#">
+                            <div class="img3"> <img src="image/03_01-210x327.jpg"> </div>
+                        </a><div class="text2">
+                            <a href="#"> </a><a href="#"><h5>Loraem Ipsum Dollar</h5></a>
+                            <h3>Giá: 95.6</h3>
+                            <button class="button1 button2">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+</div>*@
+
+<!-- Sản phẩm -->
+<div class="container">
+
+    <div class="col-md-9">
+
+        <div class="texthead">
+            <h1>Sản phẩm<h1>
+        </div>
+        @foreach (var item in Model)
+        {
+
+            <div class="col-md-4">
+                
+                <a href="@Url.Action("Details","SanPham", new { MaSanPham = item.MaSanPham })"></a>
+                <div class="product2">
+                    <a href="@Url.Action("Details","SanPham", new { MaSanPham = item.MaSanPham })">
+                        <div class="img3"> <img src="@Url.Content("~/Content/SanPham/"+item.HinhAnh+".jpg")"> </div>
+                    </a><div class="text2">
+                        <a href="@Url.Action("Details","SanPham", new { MaSanPham = item.MaSanPham })"> </a><a href="@Url.Action("Details","SanPham", new { MaSanPham = item.MaSanPham })"><h5>@item.TenSanPham</h5></a>
+                        <h3>@item.DonGia đ</h3>
+                    <h4>Đã bán: @item.SoLuongMua</h4>
+                        @*<a href="@Url.Action("ThemGioHang", "GioHang", new { @MaSanPham = item.MaSanPham, @strURL= Request.Url.ToString()})"><button class="button1 button2">Thêm vào giỏ</button> </a>*@
+                       
+                    </div>
+                </div>
+
+            </div>
+        }
+
+        @*<div class="row">
+                <div class="col-md-4">
+                    <a href="#">
+                    </a><div class="product2">
+                        <a href="#">
+                            <div class="img3"> <img src="image/03_01-210x327.jpg"> </div>
+                        </a><div class="text2">
+                            <a href="#"> </a><a href="#"><h5>Loraem Ipsum Dollar</h5></a>
+                            <h3>Giá: 95.6 <del style="font-size: 12px;">Giá: 110.00</del></h3>
+                            <button class="button1 button2">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <a href="#">
+                    </a><div class="product2">
+                        <a href="#">
+                            <div class="img3"> <img src="image/03_01-210x327.jpg"> </div>
+                        </a><div class="text2">
+                            <a href="#"> </a><a href="#"><h5>Loraem Ipsum Dollar</h5></a>
+                            <h3>Giá: 95.6</h3>
+                            <button class="button1 button2">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <a href="#">
+                    </a><div class="product2">
+                        <a href="#">
+                            <div class="img3"> <img src="image/03_01-210x327.jpg"> </div>
+                        </a><div class="text2">
+                            <a href="#"> </a><a href="#"><h5>Loraem Ipsum Dollar</h5></a>
+                            <h3>Giá: 95.6</h3>
+                            <button class="button1 button2">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>*@
+    </div>
+    <div class="col-md-3">
+        <aside>
+            <div class="toprated">
+                @*<h1>Đánh giá cao</h1>
+                    <div class="imgpart2">
+                        <div class="product-item"> <img src="image/08_01-210x327.jpg" alt="img"> </div>
+                        <div class="product-item-des">
+                            <p>Mauris sed neque turpis</p>
+                            <h4>Giá: 99.50</h4>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="imgpart2">
+                        <div class="product-item"> <img src="image/08_01-210x327.jpg" alt="img"> </div>
+                        <div class="product-item-des">
+                            <p>Mauris sed neque turpis</p>
+                            <h4>Giá: 99.50 <del style="font-size: 12px;">Giá: 115.00</del></h4>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="imgpart2">
+                        <div class="product-item"> <img src="image/08_01-210x327.jpg" alt="img"> </div>
+                        <div class="product-item-des">
+                            <p>Mauris sed neque turpis</p>
+                            <h4>Giá: 99.50</h4>
+                        </div>
+                    </div>*@
+                @Html.Partial("~/Views/Intro/BanChayPartial.cshtml", list)
+            </div>
+        </aside>
+
+    </div>
+    @* <div class="col-md-3">
+            <aside>
+                <div class="toprated">
+                    <h1>Đánh giá cao</h1>
+                    <div class="imgpart2">
+                        <div class="product-item"> <img src="image/08_01-210x327.jpg" alt="img"> </div>
+                        <div class="product-item-des">
+                            <p>Mauris sed neque turpis</p>
+                            <h4>Giá: 99.50</h4>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="imgpart2">
+                        <div class="product-item"> <img src="image/08_01-210x327.jpg" alt="img"> </div>
+                        <div class="product-item-des">
+                            <p>Mauris sed neque turpis</p>
+                            <h4>Giá: 99.50 <del style="font-size: 12px;">Giá: 115.00</del></h4>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="imgpart2">
+                        <div class="product-item"> <img src="image/08_01-210x327.jpg" alt="img"> </div>
+                        <div class="product-item-des">
+                            <p>Mauris sed neque turpis</p>
+                            <h4>Giá: 99.50</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+        </div>*@
+    <!--</div>-->
+    <!-- Sản phẩm -->
+</div>
+<br />
+<div class="dlink">
+    <center>
+        Trang @(Model.PageCount<Model.PageNumber ? 0:Model.PageNumber)/@Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </center>
+</div>

@@ -1,0 +1,42 @@
+﻿@using PagedList.Mvc
+@using Shop_Clothes_Demo.Models
+@model PagedList.IPagedList<Shop_Clothes_Demo.Models.SanPham>
+@{
+    ViewBag.Title = "SanPham";
+    Layout = "~/Views/Shared/_LayoutOverView.cshtml";
+}
+
+<div class="container">
+
+    <div class="col-md-12">
+
+        <div class="texthead">
+            <h1>@ViewBag.TenLoai Dành Cho @ViewBag.TenNhom<h1>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <a href="">
+                </a><div class="product2">
+                    <a href="@Url.Action("Details","SanPham", new { MaSanPham = item.MaSanPham })">
+                        <div class="img3"> <img src="@Url.Content("~/Content/SanPham/"+item.HinhAnh+".jpg")"> </div>
+                    </a><div class="text2">
+                        <a href="@Url.Action("ThemGioHang", "GioHang", new { @MaSanPham = item.MaSanPham, @strURL = Request.Url.ToString()})"> </a><a href="@Url.Action("Details","SanPham", new { MaSanPham = item.MaSanPham })"><h5>@item.TenSanPham</h5></a>
+                        <h3>@item.DonGia </h3>
+                <h4>Đã bán: @item.SoLuongMua</h4>
+                        @*<button class="button1 button2">Thêm vào giỏ hàng</button>*@
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+</div>
+<br />
+<div class="dlink">
+    <center>
+        Trang @(Model.PageCount<Model.PageNumber ? 0:Model.PageNumber)/@Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("SanPham", new { page = page }))
+    </center>
+</div>
+

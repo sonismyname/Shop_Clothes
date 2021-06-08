@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Shop_Clothes_Demo.Models.SanPham>
+@{
+    if (Model == null)
+    {
+        <h1>__Không có sản phẩm nào tương tự__</h1>
+    }
+    else
+    {
+        <!--View sp tương tu-->
+        foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="content_box">
+                    <a href="@Url.Action("Details","SanPham", new { MaSanPham = item.MaSanPham })">
+                        <img style="height:250px;width:210px;" src="@Url.Content("~/Content/SanPham/"+item.HinhAnh+".jpg")" class="img-responsive" alt="">
+                    </a>
+                </div>
+                <h4><a href="@Url.Action("Details","SanPham", new { MaSanPham = item.MaSanPham })">@item.TenSanPham</a></h4>
+                <p>@item.DonGia đ</p>
+            </div>
+        }
+    }
+}

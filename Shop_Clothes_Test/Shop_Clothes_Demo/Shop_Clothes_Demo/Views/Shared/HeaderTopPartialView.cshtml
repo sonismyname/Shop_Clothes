@@ -1,0 +1,145 @@
+﻿@using Shop_Clothes_Demo.Models
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<div class="top-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12">
+                <div class="top-number">
+                    <p><i class="fa fa-phone-square"></i>&nbsp;+84865580084 </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+                <div class="social">
+                    @*fb*@
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="logo"> <a href=""><h1>HAOC<span style="color:#FB5982">Store</span></h1></a> </div>
+            </div>
+            <div class="col-md-6">
+                <form method="get" action="~/Intro/Search">
+                    <input type="text" name="search" placeholder=" Tìm kiếm..">
+                </form>
+            </div>
+            @{
+                if (Session["username"] != null && Session["username"] != "")
+                {
+                    ThanhVien tv = (ThanhVien)Session["username"];
+                    @*<form action="Logout" method="post">*@
+                    @*<h3><span style="color:#FB5982" >Thành Viên: @tv.HoTen</span></h3>*@
+                    @*<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">*@
+                    <div class="col-md-3">
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:#FFFFFF">Thành viên: @tv.HoTen<span class="caret"></span></a>
+                            <ul class="dropdown-menu animated swing">
+                                <li><a href="">Thông tin tài khoản</a></li>
+                                <li><a href="@Url.Action("SignOut","Login")">Đăng xuất</a></li>
+                            </ul>
+
+                        </li>
+                    </div>
+
+                    @* </div>*@
+                    @*Gio Hang*@
+
+                    @Html.Action("GioHangPartial", "GioHang")
+                    @*<div class="col-md-3">
+                        <button class="button button1" o>Đăng xuất</button>
+                    </div>
+                </form>*@
+
+                }
+                else
+                {
+        <div class="col-md-3">
+            <button id="btnDangNhap" class="button button1" o style="height:auto;width:auto;">Đăng nhập</button>@Html.Action("GioHangPartial", "GioHang")
+        </div>
+                    
+                }
+            }
+            
+
+        </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <nav class="navbar navbar-default">
+                                <div class="container">
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                                    </div>
+                                    @Html.Action("MenuPartial", "Intro");
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+</div>
+<link rel="stylesheet" href="~/Content/Login/css/style.css" type="text/css" media="all" />
+<div id="popup_login">
+    @using (Html.BeginForm("DangNhap", "Intro"))
+    {
+        <section class="w3l-login">
+            <div class="overlay">
+                <div class="wrapper">
+                    <div class="form-section">
+                        <div style="clear:both; text-align:right; margin-bottom:0;">
+                            <span id="close_dangnhap" class="btn btn-danger">X</span>
+                        </div>
+                        <h3>Login</h3>
+                        <h6>To continue with Us</h6>
+                        <form action="#" method="post" class="signin-form">
+                            <div class="form-input">
+                                <input type="text" name="txtTenDangNhap" placeholder="Username" required="" autofocus>
+                            </div>
+                            <div class="form-input">
+                                <input type="password" name="txtMatKhau" placeholder="Password" required="">
+                            </div>
+                            <label class="check-remaind">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <p class="remember">Remember me</p>
+                            </label>
+                            <button type="submit" class="btn btn-primary theme-button mt-4">Log in</button>
+                            <div class="new-signup">
+                                <a href="#reload" class="signuplink">Forgot username or password?</a>
+                            </div>
+                        </form>
+                        <p class="signup">Don’t have account yet? <a href="#signup.html" class="signuplink">Sign Up</a></p>
+                    </div>
+                </div>
+            </div>
+            <div id='stars'></div>
+            <div id='stars2'></div>
+            <div id='stars3'></div>
+
+        </section>
+    }
+</div>
+<style>
+    /*css cho div popup_login*/
+    #popup_login {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,.5);
+        z-index: 999;
+        display: none;
+    }
+</style>
+@*Sử dụng jquery*@
+<script type="text/javascript">
+    $("#btnDangNhap").click(function () {
+        //$("#popup_login").css("display", "block");
+        $("#popup_login").show();
+    })
+    $("#close_dangnhap").click(function () {
+        //$("#popup_login").css("display", "block");
+        $("#popup_login").hide();
+    })
+</script>

@@ -1,0 +1,20 @@
+﻿@using Shop_Clothes_Demo.Models;
+@model IEnumerable<SanPham>
+
+<h1>Bán chạy nhất</h1>
+
+
+@foreach (var item in Model)
+{
+    <div class="imgpart2">
+        <a href="@Url.Action("Details","SanPham", new { MaSanPham = item.MaSanPham })">
+        <div class="product-item"> <img src="@Url.Content("~/Content/SanPham/"+item.HinhAnh+".jpg")" alt="img"> </div>
+        </a>    
+        <div class="product-item-des">
+            <a href="@Url.Action("Details","SanPham", new { MaSanPham = item.MaSanPham })"><p>@item.TenSanPham</p></a>
+            <h3>Giá: @item.DonGia</h3>
+            <p>Đã bán: @item.SoLuongMua</p>
+        </div>
+    </div>
+    <hr>
+}

@@ -1,0 +1,265 @@
+﻿@using Shop_Clothes_Demo.Models;
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutOverView.cshtml";
+}
+@{
+    IEnumerable<SanPham> list = (IEnumerable<SanPham>)ViewBag.listsptt;
+    IEnumerable<PhanHoi> listPH = (IEnumerable<PhanHoi>)ViewBag.BinhLuan;
+    IEnumerable<NhaSanXuat> listNSX = (IEnumerable<NhaSanXuat>)ViewBag.ThongTinThem;
+}
+<link href="~/Content/Details/css/stylede.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="~/Content/Details/css/etalage.css">
+<script src="~/Content/Details/js/jquery.etalage.min.js"></script>
+<script src="~/Content/Details/js/jquery.easydropdown.js"></script>
+<script>
+    jQuery(document).ready(function ($) {
+
+        $('#etalage').etalage({
+            thumb_image_width: 300,
+            thumb_image_height: 400,
+            source_image_width: 900,
+            source_image_height: 1200,
+            show_hint: true,
+            click_callback: function (image_anchor, instance_id) {
+                alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
+            }
+        });
+
+    });
+</script>
+
+<div class="single_top">
+    <div class="container">
+
+        <div class="single_grid">
+            <div class="grid images_3_of_2">
+                <ul id="etalage">
+                    <li>
+                        <a href="">
+                            <img class="etalage_thumb_image" src="@Url.Content("~/Content/SanPham/"+Model.HinhAnh+".jpg")" class="img-responsive" />
+                            <img class="etalage_source_image" src="@Url.Content("~/Content/SanPham/"+Model.HinhAnh+".jpg")" class="img-responsive" title="" />
+                        </a>
+                    </li>
+                    <li>
+                        <img class="etalage_thumb_image" src="@Url.Content("~/Content/SanPham/"+Model.HinhAnh2+".jpg")" class="img-responsive" />
+                        <img class="etalage_source_image" src="@Url.Content("~/Content/SanPham/"+Model.HinhAnh2+".jpg")" class="img-responsive" title="" />
+                    </li>
+                    <li>
+                        <img class="etalage_thumb_image" src="@Url.Content("~/Content/SanPham/"+Model.HinhAnh3+".jpg")" class="img-responsive" />
+                        <img class="etalage_source_image" src="@Url.Content("~/Content/SanPham/"+Model.HinhAnh3+".jpg")" class="img-responsive" />
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="desc1 span_3_of_2">
+                <ul class="back">
+                    <li><i class="back_arrow"> </i>Quay lại <a href="~/Intro/Index">HAOC's Clothing</a></li>
+                </ul>
+                <h1>@Model.TenSanPham</h1>
+                <p>@Model.MoTa</p>
+                @*  <div class="dropdown_top">
+                        <div class="dropdown_left">
+                            <select class="dropdown" tabindex="10" data-settings='{"wrapperClass":"metro1"}'>
+                                <option value="0">Select size</option>
+                                <option value="1">M</option>
+                                <option value="2">L</option>
+                                <option value="3">XL </option>
+                                <option value="4">Fs</option>
+                                <option value="5">S </option>
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>*@
+                @*<div>
+                        <h3>Số lượng:</h3><br />
+                        <input name="SoLuongSP" style="float: left; width: 35%;" type="number" value="1" min="1" max="100" />
+                        <div class="clearfix"></div>
+                    </div>*@
+                <div class="simpleCart_shelfItem">
+                    <div class="price_single">
+                        @*<span class="amount item_price"></span>*@
+                        <div class="head"><h3>@Model.DonGia đ</h3></div>
+
+                        <div class="clearfix"></div>
+
+                    </div>
+                    @using (Html.BeginForm("ThemGioHang", "GioHang", new { @MaSanPham = Model.MaSanPham, @strURL = Request.Url.ToString() }))
+                    {
+                        <div class="dropdown_top">
+                            <div class="dropdown_left">
+                                <select class="dropdown" tabindex="10" data-settings='{"wrapperClass":"metro1"}' name="_size">
+                                    <option value="1">M</option>
+                                    <option value="2">L</option>
+                                    <option value="3">XL </option>
+                                    <option value="4">FS</option>
+                                    <option value="5">S </option>
+                                </select>
+                            </div>
+                            <div class="clearfix"></div>
+                            <br />
+                            <div>
+                                <h3>Số Lượng: </h3><br />
+                                <input type="number" max="100" min="1" value="1" name="SoLuong"/>
+                               @* <div class="quantity">
+                                    <div class="quantity-select">
+                                        <div class="entry value-minus">&nbsp;</div>
+                                        <div class="entry value">1</div>
+                                        <div class="entry value-plus active">&nbsp;</div>
+                                    </div>
+                                </div>*@
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary theme-button mt-4">Thêm vào giỏ hàng</button>
+                    }
+                    <!--<div class="single_but"><a href="" class="item_add btn_3" value=""></a></div>-->
+                    @*<div class="size_2-right"><a href="" class="item_add item_add1 btn_5" value="" />Thêm vào giỏ hàng </a></div>*@
+                    @* @Url.Action("ThemGioHang", "GioHang", new { @MaSanPham = Model.MaSanPham, @strURL = Request.Url.ToString() })*@
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+
+
+
+
+
+        <ul class="menu_drop">
+            <li class="item1">
+                <a href="#"><img src="~/Content/Details/images/product_arrow.png">Mô tả sản phẩm</a>
+                <ul>
+                    <li class="subitem1"><a href="">@Model.MoTa</a></li>
+                </ul>
+            </li>
+            <li class="item2">
+                <a href="#"><img src="~/Content/Details/images/product_arrow.png">Thông tin thêm</a>
+                <ul>
+                    @{
+                        if (listNSX != null)
+                        {
+                            foreach (var item in listNSX)
+                            {
+                                <li class="subitem2"><a href="">Nhà sản xuất: @item.TenNhaSanXuat</a></li>
+                                <li class="subitem3"><a href="">Thông tin nhà sản xuât: @item.ThongTin</a></li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="subitem2">Không có thông tin thêm</li>
+                        }
+                    }
+
+
+                </ul>
+            </li>
+            <li class="item3">
+                <a href="#"><img src="">Bình luận(@listPH.Count())</a>
+                <ul>
+                    @{
+                        if (listPH.Count() != 0)
+                        {
+                            foreach (var item in listPH)
+                            {
+
+                                <li class="subitem1"><a href="">* @item.NoiDung</a></li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="subitem1">__Hiện tại chưa có bình luận nào__</li>
+                        }
+                    }
+
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <h3 class="m_2">Sản phẩm tương tự</h3>
+    <div class="container">
+        <div class="box_3">
+            @Html.Partial("~/Views/SanPham/SanPhamTuongTuPartialView.cshtml", list)
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .value-minus,
+    .value-plus {
+        height: 40px;
+        line-height: 24px;
+        width: 40px;
+        margin-right: 3px;
+        display: inline-block;
+        cursor: pointer;
+        position: relative;
+        font-size: 18px;
+        color: #fff;
+        text-align: center;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        border: 1px solid #b2b2b2;
+        vertical-align: bottom;
+    }
+
+    .quantity-select .entry.value-minus:before,
+    .quantity-select .entry.value-plus:before {
+        content: "";
+        width: 13px;
+        height: 2px;
+        background: #FDA30E;
+        left: 50%;
+        margin-left: -7px;
+        top: 50%;
+        margin-top: -0.5px;
+        position: absolute;
+    }
+
+    .quantity-select .entry.value-plus:after {
+        content: "";
+        height: 13px;
+        width: 2px;
+        background: #FDA30E;
+        left: 50%;
+        margin-left: -1.4px;
+        top: 50%;
+        margin-top: -6.2px;
+        position: absolute;
+    }
+
+    .value {
+        cursor: default;
+        width: 40px;
+        height: 40px;
+        padding: 8px 0px;
+        color: #000000;
+        line-height: 24px;
+        border: 1px solid #B2B2B2;
+        text-align: center;
+        display: inline-block;
+        margin-right: 3px;
+    }
+
+    .quantity-select .entry.value-minus:hover,
+    .quantity-select .entry.value-plus:hover {
+        background: #E5E5E5;
+    }
+
+    .quantity-select .entry.value-minus {
+        margin-left: 0;
+    }
+</style>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $('.value-plus').on('click', function () {
+        var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) + 1;
+        divUpd.text(newVal);
+    });
+
+    $('.value-minus').on('click', function () {
+        var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) - 1;
+        if (newVal >= 1) divUpd.text(newVal);
+    });
+</script>

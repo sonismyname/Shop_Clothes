@@ -1,0 +1,182 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ec-commerce site</title>
+    <link href="~/Content/Layout/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Layout/css/style.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Layout/css/Aboutcss.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Layout/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Layout/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+</head>
+
+<body>
+    @Html.Partial("~/Views/Shared/HeaderTopPartialView.cshtml")
+    
+    <!--<div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <div class="top-number">
+                        <p><i class="fa fa-phone-square"></i>&nbsp;+84865580084 </p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="social">-->
+    @*fb*@
+    <!--</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="logo"> <a href=""><h1>HAOC<span style="color:#FB5982">Store</span></h1></a> </div>
+        </div>
+        <div class="col-md-6">
+            <form>
+                <input type="text" name="search" placeholder=" Search..">
+            </form>
+        </div>
+        @{
+            if (Session["username"] != null)
+            {
+                <form action="Logout" method="post">
+                    <h1><span style="color:#FB5982">Tài khoản:</span> <a href=""> @Session["username"]</a></h1>
+                    <div class="col-md-3">
+                        <button class="button button1" o>Đăng xuất</button>
+                    </div>
+                </form>
+
+            }
+            else
+            {
+                <form action="~/Login/Index">
+                    <div class="col-md-3">
+                        <button class="button button1" o>Đăng nhập</button>
+                    </div>
+                </form>
+            }
+        }
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+    <!--<div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+    </div>-->
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <!--@Html.Action("MenuPartial", "Intro");-->
+    @*<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="~/Intro/Index">Trang chủ <span class="sr-only">(current)</span></a></li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category<span class="caret"></span></a>
+                    <ul class="dropdown-menu animated swing">
+                        <li><a href="#">Danh mục sản phẩm ở đây</a></li>
+                        <li><a href="#">V</a></li>
+                        <li><a href="#">Add TỪ CSDL</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="~/Blog/Index">Thông tin <span class="sr-only">(current)</span></a></li>
+                <li><a href="~/Blog/Bloger">Blog<span class="sr-only">(current)</span></a></li>
+                <li><a href="~/Blog/Contact">Liên hệ<span class="sr-only">(current)</span></a></li>
+            </ul>
+        </div>*@-->
+    <!-- /.navbar-collapse -->
+    <!--</div>-->
+    <!-- /.container-fluid -->
+    <!--</nav>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <!--    ============   backimg/slider ===============-->
+
+    <div class="container">
+        <div>
+            @RenderBody()
+        </div>
+       
+    </div>
+    <!--    /*============texthead=============*/-->
+    <div class="footer">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="followus">
+                            <h4>Follow us</h4> <a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                            <a href="#"> <i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            <a href="#"> <i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"> <i class="fa fa-google-plus-square" aria-hidden="true"></i></a>
+                            <div class="helpinfo">
+                                <h4>Help / Info</h4>
+                                <a href="~/Home/Contact">FAQ</a><br />
+                                <a href="">About</a><br />
+                                <a href="">Developers</a><br />
+                                <a href="">Contact</a><br />
+                                <a href="">Terms & Conditions</a><br />
+                                <a href="">Privacy & Cookie Policy</a><br />
+                                <a href="">Privacy & Cookie Policy</a><br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="followus">
+                            <div class="helpinfo">
+                                <h4>Nữ</h4>
+                                <a href="">Áo</a><br />
+                                <a href="">Quần</a><br />
+                                <a href="">Mũ</a><br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="followus">
+                            <div class="helpinfo">
+                                <h4>Nam</h4>
+                                <a href="">Áo</a><br />
+                                <a href="">Quần</a><br />
+                                <a href="">Mũ</a><br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="followus">
+                            <div class="helpinfo">
+                                <h4>Cats</h4>
+                                <a href="">Thiết kế</a><br />
+                                <a href="">Doanh mục</a><br />
+                                <a href="">Cửa hàng</a><br />
+                                <a href="">Xu hướng</a><br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="footerAbout">
+            <div class="container">
+                <div class="col-md-12">
+                    <p>CopyRight By Night</p>
+                </div>
+            </div>
+        </div>*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="~/Content/Layout/js/jquery-3.1.1.min.js"></script>
+    <script src="~/Content/Layout/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
 HA:
 <add name="ShopModel1" connectionString="Data Source=LAPTOP-9PE5ABV1\SQLEXPRESS;Initial Catalog=Websitebanhang;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />
 Sơn:
-<add name="ShopModel1" connectionString="data source=DESKTOP-E8F4EIG;initial catalog=Websitebanhang;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />
+Sơn Ăn cứt <add name="ShopModel1" connectionString="data source=DESKTOP-E8F4EIG;initial catalog=Websitebanhang;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />

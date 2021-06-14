@@ -54,8 +54,7 @@ namespace Shop_Clothes_Demo.Controllers
         [HttpGet]
         public ActionResult Search(string search)
         {
-            string kq = search;
-            return RedirectToAction("Index", "Intro");
+            return View(dao.searchbyName(search));
         }
     }
 }

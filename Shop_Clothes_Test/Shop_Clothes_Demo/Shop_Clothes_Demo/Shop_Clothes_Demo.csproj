@@ -469,6 +469,7 @@
     <Content Include="Views\Shared\_LayoutAccPage1.cshtml" />
     <Content Include="Views\Login\ListDonHang.cshtml" />
     <Content Include="Views\Login\ChiTietDonHang.cshtml" />
+    <Content Include="Views\Intro\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

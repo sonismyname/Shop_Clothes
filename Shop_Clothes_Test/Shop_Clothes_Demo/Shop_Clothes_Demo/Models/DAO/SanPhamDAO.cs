@@ -83,5 +83,10 @@ namespace Shop_Clothes_Demo.Models.DAO
                 db.SaveChanges();
             }    
         }
+        public IEnumerable<SanPham> searchbyName(string name)
+        {
+            var lst = db.Database.SqlQuery<SanPham>("Select * from SanPham where tensanpham like N'%"+name+"%'");
+            return lst;
+        }
     }
 }

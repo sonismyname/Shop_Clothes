@@ -1,65 +1,108 @@
 ﻿
 @{
-    Layout = null;
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutOverView.cshtml";
+}
+@{
+    List<string> lst = Session["lstDangKi"] as List<string>;
 }
 
-<!DOCTYPE html>
 
-<html>
+<script type="application/x-javascript">
+    addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+           function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="~/Content/ThanhToan/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href='//fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Alegreya+Sans:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="~/Content/ThanhToan/js/jquery.min.js"></script>
+<div class="payment-info">
+    <h3>Đăng kí thành viên</h3>
 
-<head>
-    <title>The Login-Animated Website Template | Home :: w3layouts</title>
-    <meta charset="utf-8">
-    <link href="~/Content/css/style.css" rel='stylesheet' type='text/css' />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!--webfonts-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,600,700' rel='stylesheet' type='text/css'>
-    <!--//webfonts-->
-</head>
-<body>
 
-    <!-----start-main---->
-    <div class="login-form">
-        <h1>Create Account</h1>
-        <form action="RegisterAction" method="post">
-            <li>
-                <input type="text" class="text" name="us" value="User Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Name';}"><a href="#" class=" icon user"></a>
-            </li>
-            <li>
-                <input type="password" value="Password" name="pw" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"><a href="#" class=" icon user"></a>
-            </li>
-            </li>
-            <li>
-                <input type="password" value="Password" name="rpw" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"><a href="#" class=" icon lock"></a>
-            </li>
-            </li>
+    @{
+        if (lst == null)
+        {
+            <div class="login-tab">
+                <div class="user-login">
+                    <h3>THÔNG TIN CÁ NHÂN</h3>
+                    <form action="RegisterAction" method="post">
+                        <p>Họ và tên (*)</p>
+                        <input type="text" name="hoten" value="Hãy nhập họ tên..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Hãy nhập họ tên...';}" required="">
+                        <p>Số điện thoại (*)</p>
+                        <input type="text" name="sdt" value="Hãy nhập số điện thoại..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Hãy nhập số điện thoại...';}" required="">
+                        <p>Địa chỉ (*)</p>
+                        <input type="text" name="diachi" value="Hãy nhập địa chỉ..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Hãy nhập địa chỉ...';}" required="">
+                        <p>Email (*)</p>
+                        <input type="text" name="email" value="Định dạng: abc@gmail.com..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Định dạng abc@gmail.com...';}" required="">
+                        <div class="clear"></div>
+                        <h3>THÔNG TIN ĐĂNG NHẬP</h3>
+                        <p>Tài khoản (*)</p>
+                        <input type="text" name="taikhoan" value="Tài khoản..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Tài khoản...';}" required="">
+                        <p>Mật khẩu (*)</p>
+                        <input type="password" name="matkhau" value="Mật khẩu..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Mật khẩu không chứa kí tự đặc biệt...';}" required="">
+                        <p>Nhập lại mật khẩu (*)</p>
+                        <input type="password" name="rematkhau" value="Mật khẩu..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nhập lại mật khẩu...';}" required="">
 
-            <div class="forgot">
-                <h3><a href="#">Forgot Password?</a></h3>
-                <input type="submit" onclick="myFunction()" value="Sign Up"> <a href="#" class=" icon arrow"></a>                                                                                                                                                                                                                                 </h4>
+                        @*<h4 style="color:red"> @Session["thongbao"] </h4>*@
+                        @if(Session["kqdk"]!=null)
+                        {
+                            <h3 style="color:red">@Session["kqdk"]</h3>
+                        }
+                        <div class="user-grids">
+                            <div class="user-left">
+                            </div>
+                            <div class="user-left">
+                                <input type="submit" value="Đăng kí">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
-    </div>
-    <!--//End-login-form-->
-    <!--<div class="ad728x90" style="text-align:center">
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
-        <!-- w3layouts_demo_728x90 -->
-        <!--<ins class="adsbygoogle"
-             style="display:inline-block;width:728px;height:90px"
-             data-ad-client="ca-pub-9153409599391170"
-             data-ad-slot="8639520288"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>-->
+        }
+        else
+        {
+           
+            <div class="login-tab">
+                <div class="user-login">
+                    <h3>THÔNG TIN CÁ NHÂN</h3>
+                    <form action="RegisterAction" method="post">
+                        <p>Họ và tên (*)</p>
+                        <input type="text" name="hoten" value="@lst[0]" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Hãy nhập họ tên...';}" required="">
+                        <p>Số điện thoại (*)</p>
+                        <input type="text" name="sdt" value="@lst[3]" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Hãy nhập số điện thoại...';}" required="">
+                        <p>Địa chỉ (*)</p>
+                        <input type="text" name="diachi" value="@lst[1]" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Hãy nhập địa chỉ...';}" required="">
+                        <p>Email (*)</p>
+                        <input type="text" name="email" value="@lst[2]" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Định dạng abc@gmail.com...';}" required="">
+                        <div class="clear"></div>
+                        <h3>THÔNG TIN ĐĂNG NHẬP</h3>
+                        <p>Tài khoản (*)</p>
+                        <input type="text" name="taikhoan" value="@lst[4]" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Tài khoản...';}" required="">
+                        <p>Mật khẩu (*)</p>
+                        <input type="password" name="matkhau" value="@lst[5]" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Mật khẩu không chứa kí tự đặc biệt...';}" required="">
+                        <p>Nhập lại mật khẩu (*)</p>
+                        <input type="password" name="rematkhau" value="@lst[6]" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nhập lại mật khẩu...';}" required="">
 
+                        <h3 style="color:red"> @lst[7] </h3>
+                        @if (Session["kqdk"] != null)
+                        {
+                            <h3 style="color:red">@Session["kqdk"]</h3>
+                        }
+                        <div class="user-grids">
+                            <div class="user-left">
+                            </div>
+                            <div class="user-left">
+                                <input type="submit" value="Đăng kí">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+    }
 
-    <!-----start-copyright---->
-    <div class="copy-right">
-        <p>Template by <a href="">w3layouts</a></p>
-    </div>
-    <!-----//end-copyright---->
+</div>
 
-</body>
-</html>

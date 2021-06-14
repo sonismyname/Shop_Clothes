@@ -71,5 +71,17 @@ namespace Shop_Clothes_Demo.Models.DAO
                 db.SaveChanges();
             }
         }
+        public void MuaHang(int id, int soLuongMua)
+        {
+            SanPham sp = findSPByID(id);
+            //sp.NgayCapNhat = DateTime.Now;
+            if(sp!=null)
+            {
+                sp.SoLuongMua = sp.SoLuongMua + soLuongMua;
+                sp.SoLuongTon =sp.SoLuongTon - soLuongMua;
+                /*db.Entry(sp).State = System.Data.Entity.EntityState.Modified;*/
+                db.SaveChanges();
+            }    
+        }
     }
 }

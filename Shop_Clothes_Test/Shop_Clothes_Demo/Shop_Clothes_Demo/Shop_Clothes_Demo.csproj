@@ -146,9 +146,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChiTietDonHang.cs" />
+    <Compile Include="Models\DAO\ChiTietDonHangDAO.cs" />
+    <Compile Include="Models\DAO\DonDatHangDAO.cs" />
+    <Compile Include="Models\DAO\KhachHangDAO.cs" />
     <Compile Include="Models\DAO\NhaSanXuatDAO.cs" />
     <Compile Include="Models\DAO\PhanHoiDAO.cs" />
     <Compile Include="Models\DAO\SanPhamDAO.cs" />
+    <Compile Include="Models\DAO\ThanhVienDAO.cs" />
     <Compile Include="Models\DonDatHang.cs" />
     <Compile Include="Models\DTO\SanPhamDTO.cs" />
     <Compile Include="Models\ItemGioHang.cs" />
@@ -461,6 +465,10 @@
     <Content Include="Views\SanPham\Details.cshtml" />
     <Content Include="Views\SanPham\SanPhamTuongTuPartialView.cshtml" />
     <Content Include="Views\GioHang\ThanhToan.cshtml" />
+    <Content Include="Views\Login\thongTinTaiKhoan.cshtml" />
+    <Content Include="Views\Shared\_LayoutAccPage1.cshtml" />
+    <Content Include="Views\Login\ListDonHang.cshtml" />
+    <Content Include="Views\Login\ChiTietDonHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

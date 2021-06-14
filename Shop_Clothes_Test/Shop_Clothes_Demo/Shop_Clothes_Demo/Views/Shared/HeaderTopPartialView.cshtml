@@ -35,7 +35,7 @@
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:#FFFFFF">Thành viên: @tv.HoTen<span class="caret"></span></a>
                             <ul class="dropdown-menu animated swing">
-                                <li><a href="">Thông tin tài khoản</a></li>
+                                <li><a href="@Url.Action("thongTinTaiKhoan", "Login")">Thông tin tài khoản</a></li>
                                 <li><a href="@Url.Action("SignOut","Login")">Đăng xuất</a></li>
                             </ul>
 
@@ -108,7 +108,7 @@
                                 <a href="#reload" class="signuplink">Forgot username or password?</a>
                             </div>
                         </form>
-                        <p class="signup">Don’t have account yet? <a href="#signup.html" class="signuplink">Sign Up</a></p>
+                        <p class="signup">Don’t have account yet? <a href="@Url.Action("Register","Login")" class="signuplink">Sign Up</a></p>
                     </div>
                 </div>
             </div>

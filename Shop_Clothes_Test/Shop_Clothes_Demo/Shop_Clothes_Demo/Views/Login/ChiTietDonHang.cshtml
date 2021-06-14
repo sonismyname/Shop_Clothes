@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Shop_Clothes_Demo.Models.ChiTietDonHang>
+
+@{
+    ViewBag.Title = "ChiTietDonHang";
+    Layout = "~/Views/Shared/_LayoutAccPage1.cshtml";
+}
+
+<h2>ChiTietDonHang</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaDonDatHang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenSanPham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaDonDatHang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaSanPham)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenSanPham)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DonGia)
+        </td>
+        <td>
+        </td>
+    </tr>
+}
+
+</table>

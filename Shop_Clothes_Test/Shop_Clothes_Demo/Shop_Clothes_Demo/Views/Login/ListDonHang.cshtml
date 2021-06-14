@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Shop_Clothes_Demo.Models.DonDatHang>
+
+@{
+    ViewBag.Title = "ListDonHang";
+    Layout = "~/Views/Shared/_LayoutAccPage1.cshtml";
+}
+
+<h2>ListDonHang</h2>
+
+<p>
+    Danh Sách Đơn Đặt Hàng
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayDat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayGiaoDuKien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TinhTrangGiaoHang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DaThanhToan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaKhachHang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UuDai)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayDat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayGiaoDuKien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TinhTrangGiaoHang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DaThanhToan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaKhachHang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UuDai)
+        </td>
+        <td>    
+            @Html.ActionLink("Chi Tiết", "ChiTietDonHang", new { MaDonDatHang = item.MaDonDatHang }, new { @class= "btn btn-success" }) 
+        </td>
+    </tr>
+}
+
+</table>

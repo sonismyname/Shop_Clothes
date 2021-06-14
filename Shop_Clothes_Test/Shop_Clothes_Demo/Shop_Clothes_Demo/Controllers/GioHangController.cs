@@ -1,4 +1,5 @@
 ﻿using Shop_Clothes_Demo.Models;
+using Shop_Clothes_Demo.Models.DAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,10 @@ namespace Shop_Clothes_Demo.Controllers
     public class GioHangController : Controller
     {
         ShopModel db = new ShopModel();
+        SanPhamDAO daosp = new SanPhamDAO();
+        KhachHangDAO daokh = new KhachHangDAO();
+        DonDatHangDAO daodh = new DonDatHangDAO();
+        ChiTietDonHangDAO daoct = new ChiTietDonHangDAO();
         //lay gio hang
         public List<ItemGioHang> getGioHang()
         {
@@ -148,6 +153,10 @@ namespace Shop_Clothes_Demo.Controllers
         {
             ViewBag.TongTien = TinhTien();
             List<ItemGioHang> lst = getGioHang();
+            if(lst.Count<=0)
+            {
+                return RedirectToAction("Index","Intro");
+            }    
             return View(lst);
         }
         public ActionResult GioHangPartial()
@@ -180,6 +189,50 @@ namespace Shop_Clothes_Demo.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult ThanhToan(FormCollection f)
+        {
+
+            if (f["tenkhachhang"].Equals("Hãy nhập họ tên...") || f["diachi"].Equals("Hãy nhập địa chỉ...") || f["sodienthoai"].Equals("Hãy nhập số điện thoại..."))
+            {
+                Session["thongbao"] = "Hãy nhập đầy đủ thông tin !!";
+                return RedirectToAction("ThanhToan");
+            }
+            Session["thongbao"] = null;
+            KhachHang ks = new KhachHang();
+            ks.TenKhachHang = f["tenkhachhang"];
+            ks.DiaChi = f["diachi"];
+            ks.SoDienThoai = f["sodienthoai"];
+            int maKhachHang = daokh.Add(ks);
+
+            //Lưu dơn hàng từ session
+            DonDatHang ddh = new DonDatHang();
+            ddh.MaKhachHang = maKhachHang;
+            ddh.NgayDat = DateTime.Now;
+            DateTime ngayGiao = DateTime.Now;
+            ngayGiao = ngayGiao.AddDays(2);
+            ddh.NgayGiaoDuKien = ngayGiao;
+            int maDonHang = daodh.Add(ddh);
+            //lưu chi tiết đơn hàng
+            List<ItemGioHang> lst = Session["GioHang"] as List<ItemGioHang>;
+            foreach (ItemGioHang item in lst)
+            {
+                ChiTietDonHang ct = new ChiTietDonHang();
+                ct.MaSanPham = item.MaSP;
+                ct.DonGia = item.DonGia;
+                ct.MaDonDatHang = maDonHang;
+                ct.SoLuong = item.SoLuong;
+                ct.TenSanPham = item.TenSP;
+                if (daoct.Add(ct) != -1)
+                {
+                    daosp.MuaHang(item.MaSP, item.SoLuong);
+                    //thay đổi số liệu Sản Phẩm
+                }
+            }
+            Session["GioHang"] = null;
+            return RedirectToAction("Index", "Intro");
+        }
+
         public string KichThuoc(int value)
         {
             string val = "";

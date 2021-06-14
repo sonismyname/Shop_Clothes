@@ -13,35 +13,44 @@
 <link href='//fonts.googleapis.com/css?family=Alegreya+Sans:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="~/Content/ThanhToan/js/jquery.min.js"></script>
-
 <div class="payment-info">
     <h3>Thông tin thanh toán</h3>
-    <h4>Hãy nhập đầy đủ thông tin(*)</h4>
+    @*<h4>@ViewBag.thongbao abc</h4>*@
+    @*<span style="color:red">@Html.Raw(ViewBag.thongbao as string)</span>*@
+    
+    
     <div class="login-tab">
         <div class="user-login">
 
-            <form>
+            <form action="ThanhToan" method="post">
                 <p>Họ và tên (*)</p>
-                <input type="text" value="Nguyễn Văn A" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nguyễn Văn A';}" required="">
+                <input type="text" name="tenkhachhang" value="Hãy nhập họ tên..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Hãy nhập họ tên...';}" required="">
                 <p>Số điện thoại (*)</p>
-                <input type="text" value="096****431" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '096****431';}" required="">
+                <input type="text" name="sodienthoai" value="Hãy nhập số điện thoại..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Hãy nhập số điện thoại...';}" required="">
                 <p>Địa chỉ (*)</p>
-                <input type="text" value="Số 37, Hoàng Quốc Việt, Hà Nội" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Số 37, Hoàng Quốc Việt, Hà Nội';}" required="">
+                <input type="text" name="diachi" value="Hãy nhập địa chỉ..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Hãy nhập địa chỉ...';}" required="">
                 @*<input type="password" value="PASSWORD" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'PASSWORD';}" required="">*@
+            <h4 style="color:red"> @Session["thongbao"] </h4>
                 <div class="user-grids">
                     <div class="user-left">
                         <div class="single-bottom">
                             <ul>
                                 <li>
-                                    <input type="checkbox" id="brand1" value="">
+                                    <input type="checkbox" id="brand1" name="br2" value="">
                                     <label for="brand1"><span></span>Giao hàng tất cả ngày</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="brand2" value="">
+                                    <input type="checkbox" id="brand2" name="br2" value="">
                                     <label for="brand2"><span></span>Giao hàng giờ hành chính</label>
                                 </li>
+                                @*<li>
+                                        <input checked="checked" id="GioGiaoHang1" name="GioGiaoHang" type="radio" value="0" />
+                                        <label for="GioGiaoHang1">Giao hàng giờ hành chính</label><br />
+                                        <input id="GioGiaoHang2" name="GioGiaoHang" type="radio" value="1" />
+                                        <label for="GioGiaoHang2">Giao hàng tất cả ngày trong tuần</label><br />
+                                    </li>*@
                             </ul>
-                         </div>
+                        </div>
                     </div>
                     <div class="user-left">
                         <input type="submit" value="Đặt Hàng >>>">

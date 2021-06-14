@@ -308,7 +308,7 @@ input.text_box {
 	list-style:none;
 	padding:0px;
 }
-.single-bottom ul li input[type="checkbox"] {
+.single-bottom ul li input[type="radio"] {
   display: none;
 }
 .single-bottom ul li input[type="checkbox"]+label {
@@ -495,7 +495,7 @@ width:46%;
   font-weight: bold;
   border: 1px solid #ebeced;
   outline: none;
-  color: #D7D7D7;
+  color: #000000;
 }
 .user-login form{
     margin-top: 22px;

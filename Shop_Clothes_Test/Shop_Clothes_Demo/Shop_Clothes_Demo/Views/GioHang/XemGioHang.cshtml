@@ -37,7 +37,7 @@
                     <div class="cart-sec simpleCart_shelfItem">
                         <div class="cart-item cyc">
                             <a href="@Url.Action("Details", "SanPham", new { MaSanPham = item.MaSP })">
-                            <img style="height: 200px; width: 210px;" src="@Url.Content("~/Content/SanPham/" + item.HinhAnh + ".jpg")" class="img-responsive" alt="">
+                            <img style="height: 200px; width: 210px;" src="@Url.Content("~/Content/SanPham/" + item.HinhAnh)" class="img-responsive" alt="">
                             </a>
                             
                         </div>
@@ -89,8 +89,6 @@
                 <li class="last_price"><span>@tongTien đ</span></li>
                 <div class="clearfix"> </div>
             </ul>
-
-
             <div class="clearfix"></div>
             <a class="order" href="@Url.Action("ThanhToan", "GioHang")">Đặt Hàng</a>
             <div class="total-item">

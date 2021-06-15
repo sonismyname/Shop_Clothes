@@ -39,17 +39,19 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
             ViewBag.MaNhom = new SelectList(db.NhomMuas.OrderBy(n => n.TenNhom), "MaNhom", "TenNhom");
             return View(sp);
         }
-        //[ValidateInput(false)]// tắt ktra mota của microsoft
+        [ValidateInput(false)]// tắt ktra mota của microsoft
         [HttpPost]
         public ActionResult AddProduct(SanPham sp, HttpPostedFileBase[] photo)
         {
             ViewBag.MaLoaiSanPham = new SelectList(db.LoaiSanPhams.OrderBy(n => n.TenLoaiSanPham), "MaLoaiSanPham", "TenLoaiSanPham");
             ViewBag.MaNhaSanXuat = new SelectList(db.NhaSanXuats.OrderBy(n => n.TenNhaSanXuat), "MaNhaSanXuat", "TenNhaSanXuat");
             ViewBag.MaNhom = new SelectList(db.NhomMuas.OrderBy(n => n.TenNhom), "MaNhom", "TenNhom");
+
             List<string> filename = new List<string>();
+
             if (photo[0] == null || photo[1] == null || photo[2] == null)
             {
-                ViewBag.upload2 = "Thêm đầy đủ 3 hình ảnh";
+                ViewBag.upload = "Thêm đầy đủ 3 hình ảnh";
             }
 
             if (photo[0] != null && photo[1] != null && photo[2] != null)
@@ -63,12 +65,12 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
                         if (photo[i].ContentType != "image/jpeg" && photo[i].ContentType != "image/png" && photo[i].ContentType != "image/gif")
                         {
                             ViewBag.upload = "Hình Ảnh không hợp lệ!!!";
+                            return View(sp);
                         }
                         else
                         {
                             var fileName = Path.GetFileName(photo[i].FileName);
-                            string[] filenames = fileName.ToString().Split('.');
-                            filename.Add(filenames[0]);
+                            filename.Add(fileName);
                             //lấy tên hình ảnh truyền vào
                             var path = Path.Combine(Server.MapPath("~/Content/SanPham"), fileName);
                             //so sánh tên với tên hình ảnh có sẵn
@@ -89,6 +91,7 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
                 sp.HinhAnh = filename[0];
                 sp.HinhAnh2 = filename[1];
                 sp.HinhAnh3 = filename[2];
+                sp.SoLuongMua = 0;
                 int ma = spdao.Add(sp);
                 return RedirectToAction("Index", "Dashboard");
             }
@@ -98,6 +101,97 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
         {
             spdao.Delete(masp);
             return RedirectToAction("Index");
+        }
+        public ActionResult Details(int MaSanPham)
+        {
+            SanPham sp = db.SanPhams.Find(MaSanPham);
+            ViewBag.tnsx = sp.NhaSanXuat.TenNhaSanXuat.ToString();
+            ViewBag.tlsp = sp.LoaiSanPham.TenLoaiSanPham.ToString();
+            return View(sp);
+        }
+        public ActionResult Edit(int MaSanPham)
+        {
+            SanPham sp = db.SanPhams.Find(MaSanPham);
+            if (sp == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.MLSP = new SelectList(db.LoaiSanPhams.OrderBy(n => n.TenLoaiSanPham), "MaLoaiSanPham", "TenLoaiSanPham", sp.MaLoaiSanPham);
+            ViewBag.MNSX = new SelectList(db.NhaSanXuats.OrderBy(n => n.TenNhaSanXuat), "MaNhaSanXuat", "TenNhaSanXuat", sp.MaNhaSanXuat);
+            ViewBag.MN = new SelectList(db.NhomMuas.OrderBy(n => n.TenNhom), "MaNhom", "TenNhom", sp.MaNhom);
+            Session["edit"] = sp;
+            return View(sp);
+        }
+        [ValidateInput(false)]// tắt ktra mota của microsoft ở mô tả
+        [HttpPost]
+        public ActionResult Edit(SanPham sp, HttpPostedFileBase[] photo)
+        {
+            ViewBag.MLSP = new SelectList(db.LoaiSanPhams.OrderBy(n => n.TenLoaiSanPham), "MaLoaiSanPham", "TenLoaiSanPham", sp.MaLoaiSanPham);
+            ViewBag.MNSX = new SelectList(db.NhaSanXuats.OrderBy(n => n.TenNhaSanXuat), "MaNhaSanXuat", "TenNhaSanXuat", sp.MaNhaSanXuat);
+            ViewBag.MN = new SelectList(db.NhomMuas.OrderBy(n => n.TenNhom), "MaNhom", "TenNhom", sp.MaNhom);
+
+            sp.MaSanPham = (Session["edit"] as SanPham).MaSanPham;
+            sp.HinhAnh = (Session["edit"] as SanPham).HinhAnh;
+            sp.HinhAnh2 = (Session["edit"] as SanPham).HinhAnh2;
+            sp.HinhAnh3 = (Session["edit"] as SanPham).HinhAnh3;
+            //sp.MoTa = (Session["edit"] as SanPham).MoTa;
+
+            Session["edit"] = null;
+            
+            List<string> filename = new List<string>();
+            for (int i = 0; i < 3; i++)
+            {
+                if (photo[i] != null)
+                {
+                    if (photo[i].ContentLength > 0)
+                    {
+                        // kiểm tra định dạng hình ảnh
+                        if (photo[i].ContentType != "image/jpeg" && photo[i].ContentType != "image/png" && photo[i].ContentType != "image/gif")
+                        {
+                            ViewBag.upload = "Hình Ảnh không hợp lệ!!!";
+                            return View(sp);
+                        }
+                        else
+                        {
+                            var fileName = Path.GetFileName(photo[i].FileName);
+                            filename.Add(fileName);
+                            //lấy tên hình ảnh truyền vào
+                            var path = Path.Combine(Server.MapPath("~/Content/SanPham"), fileName);
+                            //so sánh tên với tên hình ảnh có sẵn
+                            if (System.IO.File.Exists(path))
+                            {
+                            }
+                            else
+                            {
+                                photo[i].SaveAs(path);
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        return View("Edit");
+                    }
+                }
+                filename.Add("");
+            }
+            if(photo[0]!= null)
+            {
+                //System.IO.File.Delete("~/Content/SanPham/" + filename);
+                sp.HinhAnh = filename[0];
+            }
+            if (photo[1] != null)
+            {
+                sp.HinhAnh2 = filename[1];
+            }
+            if (photo[2] != null)
+            {
+                sp.HinhAnh3 = filename[2];
+            }
+            sp.NgayCapNhat = DateTime.Now;
+            db.Entry(sp).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index", "Dashboard");
         }
     }
 

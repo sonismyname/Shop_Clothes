@@ -12,7 +12,7 @@
             <div class="col-md-3">
                 <div class="content_box">
                     <a href="@Url.Action("Details","SanPham", new { MaSanPham = item.MaSanPham })">
-                        <img style="height:250px;width:210px;" src="@Url.Content("~/Content/SanPham/"+item.HinhAnh+".jpg")" class="img-responsive" alt="">
+                        <img style="height:250px;width:210px;" src="@Url.Content("~/Content/SanPham/"+item.HinhAnh)" class="img-responsive" alt="">
                     </a>
                 </div>
                 <h4><a href="@Url.Action("Details","SanPham", new { MaSanPham = item.MaSanPham })">@item.TenSanPham</a></h4>

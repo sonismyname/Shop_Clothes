@@ -1,0 +1,33 @@
+﻿@model Shop_Clothes_Demo.Models.LoaiSanPham
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Chi Tiết</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên Loại Sản Phẩm: 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenLoaiSanPham)
+        </dd>
+
+        <dt>
+            Icon: 
+        </dt>
+
+        <dd>
+            <img src="@Url.Content("~/Content/LoaiSanPham/"+Model.Icon)" width="100" height="120" />
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Chỉnh Sửa", "Edit", new { MaLoaiSanPham = Model.MaLoaiSanPham }, new { @class = "btn btn-success" }) <br/><br />
+    @Html.ActionLink("Quay Lại", "Index", null, new { @class = "btn btn-success" })
+</p>

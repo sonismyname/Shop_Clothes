@@ -1,4 +1,4 @@
-namespace Shop_Clothes_Demo.Models
+﻿namespace Shop_Clothes_Demo.Models
 {
     using System;
     using System.Collections.Generic;
@@ -19,45 +19,45 @@ namespace Shop_Clothes_Demo.Models
         }
 
         [Key]
-        [DisplayName("M? S?n Ph?m")]
+        [DisplayName("Mã Sản Phẩm")]
         public int MaSanPham { get; set; }
 
         [StringLength(255)]
-        [DisplayName("T�n S?n Ph?m")]
-        [Required(ErrorMessage = "Kh�ng ��?c �? tr?ng th�ng tin!!!")]
+        [DisplayName("Tên Sản Phẩm")]
+        [Required(ErrorMessage = "Không được để trống thông tin!!!")]
         public string TenSanPham { get; set; }
 
-        [DisplayName("��n Gi�")]
-        [Required(ErrorMessage = "Kh�ng ��?c �? tr?ng th�ng tin!!!")]
+        [DisplayName("Đơn Giá")]
+        [Required(ErrorMessage = "Không được để trống thông tin!!!")]
         public decimal? DonGia { get; set; }
 
-        [DisplayName("M� T?")]
+        [DisplayName("Mô Tả")]
         public string MoTa { get; set; }
 
-        [DisplayName("Ng�y C?p Nh?t")]
-        [Required(ErrorMessage = "Kh�ng ��?c �? tr?ng th�ng tin!!!")]
+        [DisplayName("Ngày Cập Nhật")]
+        [Required(ErrorMessage = "Không được để trống thông tin!!!")]
         public DateTime? NgayCapNhat { get; set; }
 
-        [DisplayName("H?nh ?nh 1")]
+        [DisplayName("Hình Ảnh 1")]
         public string HinhAnh { get; set; }
 
-        [DisplayName("H?nh ?nh 2")]
+        [DisplayName("Hình Ảnh 2")]
         public string HinhAnh2 { get; set; }
 
-        [DisplayName("H?nh ?nh 3")]
+        [DisplayName("Hình Ảnh 3")]
         public string HinhAnh3 { get; set; }
 
-        [DisplayName("S? L�?ng Mua")]
+        [DisplayName("Số Lượng Mua")]
         public int? SoLuongMua { get; set; }
 
-        [DisplayName("S? L�?ng T?n")]
-        [Required(ErrorMessage = "Kh�ng ��?c �? tr?ng th�ng tin!!!")]
+        [DisplayName("Số Lượng Tồn")]
+        [Required(ErrorMessage = "Không được để trống thông tin!!!")]
         public int? SoLuongTon { get; set; }
-        [DisplayName("Nh� S?n Xu?t")]
+        [DisplayName("Nhà Sản Xuất")]
         public int? MaNhaSanXuat { get; set; }
-        [DisplayName("Lo?i S?n Ph?m")]
+        [DisplayName("Loại Sản Phẩm")]
         public int? MaLoaiSanPham { get; set; }
-        [DisplayName("Nh�m Mua")]
+        [DisplayName("Nhóm Mua")]
         public int? MaNhom { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

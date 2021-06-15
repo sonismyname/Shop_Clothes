@@ -19,7 +19,7 @@
                 <a href="">
                 </a><div class="product2">
                     <a href="@Url.Action("Details","SanPham", new { MaSanPham = item.MaSanPham })">
-                        <div class="img3"> <img src="@Url.Content("~/Content/SanPham/"+item.HinhAnh+".jpg")"> </div>
+                        <div class="img3"> <img src="@Url.Content("~/Content/SanPham/"+item.HinhAnh)"> </div>
                     </a><div class="text2">
                         <a href="@Url.Action("ThemGioHang", "GioHang", new { @MaSanPham = item.MaSanPham, @strURL = Request.Url.ToString()})"> </a><a href="@Url.Action("Details","SanPham", new { MaSanPham = item.MaSanPham })"><h5>@item.TenSanPham</h5></a>
                         <h3>@item.DonGia </h3>

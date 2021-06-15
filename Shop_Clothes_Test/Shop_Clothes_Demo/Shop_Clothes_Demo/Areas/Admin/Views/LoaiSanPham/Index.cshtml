@@ -1,0 +1,83 @@
+﻿
+@using PagedList.Mvc
+@model PagedList.IPagedList<Shop_Clothes_Demo.Models.LoaiSanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Loại Sản Phẩm</h2>
+<br />
+<p>
+    @Html.ActionLink("Thêm Loại Sản Phẩm", "Add", null, new { @class = "btn btn-success" })
+</p>
+<br />
+<table class="table" border="1">
+    <tr style="background-color:aquamarine">
+        <th>
+            Tên Loại Sản Phẩm
+        </th>
+        <th>
+            Icon
+        </th>
+        <th width="230"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenLoaiSanPham)
+            </td>
+            <td>
+                <img src="@Url.Content("~/Content/LoaiSanPham/"+item.Icon)" width="100" height="120" />
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { MaLoaiSanPham = item.MaLoaiSanPham }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Chi Tiết", "Details", new { MaLoaiSanPham = item.MaLoaiSanPham }, new { @class = "btn btn-success" })
+                @*@Html.ActionLink("Xóa", "Delete", new { id = item.MaSanPham }, new { @class = "btnXoa" })*@
+                <button id="btnXoa_@item.MaLoaiSanPham" class="btn btn-danger">Xóa</button>
+                <link rel="stylesheet" href="~/Content/Login/css/style.css" type="text/css" media="all" />
+                <div id="@item.MaLoaiSanPham" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); z-index: 999; display: none;">
+                    @using (Html.BeginForm("Delete", "LoaiSanPham", new { @malsp = item.MaLoaiSanPham }))
+                    {
+                        <section class="w3l-login">
+                            <div class="overlay">
+                                <div class="wrapper">
+                                    <div class="form-section">
+                                        <div style="clear:both; text-align:right; margin-bottom:0;">
+                                            <span id="Dong_@item.MaLoaiSanPham" class="btn btn-success">X</span>
+                                            <br />
+                                        </div>
+                                        <h4>Bạn có muốn xóa: @item.TenLoaiSanPham</h4>
+                                        <button type="submit" class="btn btn-primary theme-button mt-2" style="background-color:red">Xóa</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id='stars'></div>
+                            <div id='stars2'></div>
+                            <div id='stars3'></div>
+
+                        </section>
+                    }
+                </div>
+            </td>
+        </tr>
+        <script type="text/javascript">
+                    $("#btnXoa_@item.MaLoaiSanPham").click(function () {
+                        $("#@item.MaLoaiSanPham").show();
+                    })
+                    $("#Dong_@item.MaLoaiSanPham").click(function () {
+                        //$("#popup_login").css("display", "block");
+                        $("#@item.MaLoaiSanPham").hide();
+                    })
+        </script>
+    }
+
+</table>
+<div class="dlink">
+    <center>
+        Trang @(Model.PageCount<Model.PageNumber ? 0:Model.PageNumber)/@Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </center>
+</div>

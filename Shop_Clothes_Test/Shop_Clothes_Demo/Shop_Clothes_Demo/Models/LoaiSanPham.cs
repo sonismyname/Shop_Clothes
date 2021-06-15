@@ -1,7 +1,8 @@
-namespace Shop_Clothes_Demo.Models
+﻿namespace Shop_Clothes_Demo.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -19,6 +20,8 @@ namespace Shop_Clothes_Demo.Models
         public int MaLoaiSanPham { get; set; }
 
         [StringLength(255)]
+        [DisplayName("Tên Loại Sản Phẩm")]
+        [Required(ErrorMessage = "Không được để trống thông tin!!!")]
         public string TenLoaiSanPham { get; set; }
 
         public string Icon { get; set; }

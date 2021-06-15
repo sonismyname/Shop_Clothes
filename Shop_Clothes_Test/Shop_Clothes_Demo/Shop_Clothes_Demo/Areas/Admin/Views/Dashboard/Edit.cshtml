@@ -1,20 +1,20 @@
 ﻿@model Shop_Clothes_Demo.Models.SanPham
 
 @{
-    ViewBag.Title = "AddProduct";
+    ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2>Thêm Sản Phẩm</h2>
+<h2>Sửa Chi Tiết Sản Phẩm</h2>
 
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
 <script>
     tinymce.init({
-        selector: '#mytextarea'
+        selector: '.mytextarea'
     });
 </script>
 
-@using (Html.BeginForm("AddProduct", "Dashboard", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Dashboard", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -41,28 +41,17 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MoTa, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <textarea name="MoTa" id="mytextarea"></textarea>
-                @*@Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })*@
+                <textarea name="MoTa" id="MoTa" class="mytextarea">@Html.Raw(@Model.MoTa as string)</textarea>
+                
                 @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.NgayCapNhat, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input name="NgayCapNhat" type="date" class="form-control" />
-                @*@Html.EditorFor(model => model.NgayCapNhat, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.ValidationMessageFor(model => model.NgayCapNhat, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.HinhAnh, new { htmlAttributes = new { @class = "form-control" } })*@
+                <input type="image" src="@Url.Content("~/Content/SanPham/"+Model.HinhAnh)" /><br />
                 <input name="photo" type="file" />
-                @*@Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })*@
-                @*<span style="color:red">@Html.Raw(ViewBag.upload0 as string)</span>*@
             </div>
         </div>
 
@@ -70,10 +59,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HinhAnh2, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.HinhAnh2, new { htmlAttributes = new { @class = "form-control" } })*@
+                <input type="image" src="@Url.Content("~/Content/SanPham/"+Model.HinhAnh2)" /><br/>
                 <input name="photo" type="file" />
-                @*@Html.ValidationMessageFor(model => model.HinhAnh2, "", new { @class = "text-danger" })*@
-                @*<span style="color:red">@Html.Raw(ViewBag.upload1 as string)</span>*@
             </div>
         </div>
 
@@ -81,21 +68,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HinhAnh3, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.HinhAnh3, new { htmlAttributes = new { @class = "form-control" } })*@
+                <input type="image" src="@Url.Content("~/Content/SanPham/"+Model.HinhAnh3)" /><br />
                 <input name="photo" type="file" />
-                @*@Html.ValidationMessageFor(model => model.HinhAnh3, "", new { @class = "text-danger" })*@
+
                 <span style="color:red">@Html.Raw(ViewBag.upload as string)</span>
             </div>
         </div>
-
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.SoLuongMua, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.SoLuongMua, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.SoLuongMua, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.SoLuongTon, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -108,8 +86,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MaNhaSanXuat, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MaNhaSanXuat", null, new { @class = "form-control" })
-                @*@Html.EditorFor(model => model.MaNhaSanXuat, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("MaNhaSanXuat", (SelectList)ViewBag.MNSX, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MaNhaSanXuat, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -117,8 +94,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MaLoaiSanPham, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MaLoaiSanPham", null, new { @class = "form-control" })
-                @*@Html.EditorFor(model => model.MaLoaiSanPham, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("MaLoaiSanPham", (SelectList)ViewBag.MLSP, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MaLoaiSanPham, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -126,22 +102,21 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MaNhom, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MaNhom", null, new { @class = "form-control" })
-                @*@Html.EditorFor(model => model.MaNhom, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("MaNhom", (SelectList)ViewBag.MN, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MaNhom, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Lưu" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Quay Lại", "Index")
 </div>
 
 <style>

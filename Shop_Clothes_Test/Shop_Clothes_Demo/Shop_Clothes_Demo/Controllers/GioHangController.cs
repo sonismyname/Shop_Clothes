@@ -192,19 +192,30 @@ namespace Shop_Clothes_Demo.Controllers
         [HttpPost]
         public ActionResult ThanhToan(FormCollection f)
         {
-
+            ThanhVien tv = Session["username"] as ThanhVien;
+            //KhachHang ks = daokh;
             if (f["tenkhachhang"].Equals("Hãy nhập họ tên...") || f["diachi"].Equals("Hãy nhập địa chỉ...") || f["sodienthoai"].Equals("Hãy nhập số điện thoại..."))
             {
                 Session["thongbao"] = "Hãy nhập đầy đủ thông tin !!";
                 return RedirectToAction("ThanhToan");
             }
             Session["thongbao"] = null;
-            KhachHang ks = new KhachHang();
-            ks.TenKhachHang = f["tenkhachhang"];
-            ks.DiaChi = f["diachi"];
-            ks.SoDienThoai = f["sodienthoai"];
-            int maKhachHang = daokh.Add(ks);
-
+            int maKhachHang;
+            if(Session["username"] != null)
+            {
+                //lưu đơn hàng theo thành viên
+                KhachHang ks = db.KhachHangs.SingleOrDefault(n=>n.MaThanhVien==tv.MaThanhVien);
+                maKhachHang = ks.MaKhachHang;
+            }    
+            else
+            {
+                //tạo đơn hàng và khách hàng mới
+                KhachHang ks = new KhachHang();
+                ks.TenKhachHang = f["tenkhachhang"];
+                ks.DiaChi = f["diachi"];
+                ks.SoDienThoai = f["sodienthoai"];
+                maKhachHang = daokh.Add(ks);
+            }    
             //Lưu dơn hàng từ session
             DonDatHang ddh = new DonDatHang();
             ddh.MaKhachHang = maKhachHang;

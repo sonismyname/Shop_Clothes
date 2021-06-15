@@ -22,7 +22,7 @@ namespace Shop_Clothes_Demo.Models.DAO
         {
             string que = "select dh.MaDonDatHang, dh.NgayDat, dh.NgayGiaoDuKien, dh.TinhTrangGiaoHang, dh.DaThanhToan, dh.MaKhachHang, dh.UuDai " +
             "from DonDatHang dh, KhachHang kh, ThanhVien tv " +
-            "where dh.makhachhang = kh.makhachhang and kh.mathanhvien = tv.mathanhvien and tv.mathanhvien = 2";
+            "where dh.makhachhang = kh.makhachhang and kh.mathanhvien = tv.mathanhvien and tv.mathanhvien = "+MaThanhVien+"";
             var lst = db.Database.SqlQuery<DonDatHang>(que);
             return lst;
         }

@@ -24,7 +24,7 @@ namespace Shop_Clothes_Demo.Controllers
             string pass = f["pw"];
             Session["username"] = userName;
             //kt login
-            return RedirectToAction("Index", "Intro");
+            return RedirectToAction("Index", "Dashboard");
         }
         public ActionResult Register()
         {

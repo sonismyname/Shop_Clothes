@@ -1,7 +1,8 @@
-namespace Shop_Clothes_Demo.Models
+﻿namespace Shop_Clothes_Demo.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -19,6 +20,7 @@ namespace Shop_Clothes_Demo.Models
         public int MaNhom { get; set; }
 
         [StringLength(255)]
+        [DisplayName("Tên Nhà Sản Xuất")]
         public string TenNhom { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

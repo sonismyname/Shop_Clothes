@@ -26,7 +26,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TenSanPham, new { htmlAttributes = new { @class = "form-control" } })
 
-                @Html.ValidationMessageFor(model => model.TenSanPham, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.TenSanPham, "", new { })
             </div>
         </div>
 
@@ -34,7 +34,7 @@
             @Html.LabelFor(model => model.DonGia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DonGia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DonGia, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.DonGia, "", new { })
             </div>
         </div>
 
@@ -43,7 +43,7 @@
             <div class="col-md-10">
                 <textarea name="MoTa" id="mytextarea"></textarea>
                 @*@Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.MoTa, "", new { })
             </div>
         </div>
 
@@ -52,7 +52,7 @@
             <div class="col-md-10">
                 <input name="NgayCapNhat" type="date" class="form-control" />
                 @*@Html.EditorFor(model => model.NgayCapNhat, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.ValidationMessageFor(model => model.NgayCapNhat, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.NgayCapNhat, "", new { })
             </div>
         </div>
 
@@ -101,7 +101,7 @@
             @Html.LabelFor(model => model.SoLuongTon, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SoLuongTon, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SoLuongTon, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.SoLuongTon, "", new {})
             </div>
         </div>
 
@@ -110,7 +110,7 @@
             <div class="col-md-10">
                 @Html.DropDownList("MaNhaSanXuat", null, new { @class = "form-control" })
                 @*@Html.EditorFor(model => model.MaNhaSanXuat, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.ValidationMessageFor(model => model.MaNhaSanXuat, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.MaNhaSanXuat, "", new { })
             </div>
         </div>
 
@@ -119,7 +119,7 @@
             <div class="col-md-10">
                 @Html.DropDownList("MaLoaiSanPham", null, new { @class = "form-control" })
                 @*@Html.EditorFor(model => model.MaLoaiSanPham, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.ValidationMessageFor(model => model.MaLoaiSanPham, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.MaLoaiSanPham, "", new {  })
             </div>
         </div>
 
@@ -128,7 +128,7 @@
             <div class="col-md-10">
                 @Html.DropDownList("MaNhom", null, new { @class = "form-control" })
                 @*@Html.EditorFor(model => model.MaNhom, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.ValidationMessageFor(model => model.MaNhom, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.MaNhom, "", new {  })
             </div>
         </div>
 

@@ -29,6 +29,7 @@
             <div class="col-md-10">
                 <input type="image" src="@Url.Content("~/Content/LoaiSanPham/"+Model.Icon)" /><br />
                 <input name="photo" type="file" />
+                <span style="color:red">@Html.Raw(ViewBag.uploadlspe as string)</span>
             </div>
         </div>
 

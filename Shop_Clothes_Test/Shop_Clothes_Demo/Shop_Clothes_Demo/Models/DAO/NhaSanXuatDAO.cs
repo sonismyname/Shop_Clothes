@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -34,5 +35,38 @@ namespace Shop_Clothes_Demo.Models.DAO
                 return null;
             }    
         }
+        public IEnumerable<NhaSanXuat> LoadNhaSanXuat(int Pagenum, int Pagesiz)
+        {
+            var lnsx = db.Database.SqlQuery<NhaSanXuat>("select * from NhaSanXuat")
+                .ToPagedList<NhaSanXuat>(Pagenum, Pagesiz);
+            return lnsx;
+        }
+        public NhaSanXuat findSPByID(int? MaNhaSanXuat)
+        {
+            NhaSanXuat nsx = db.NhaSanXuats.Find(MaNhaSanXuat);
+            return nsx;
+        }
+        public int Add(NhaSanXuat nsx)
+        {
+            db.NhaSanXuats.Add(nsx);
+            db.SaveChanges();
+            return nsx.MaNhaSanXuat;
+        }
+
+        public void Delete(int id)
+        {
+            NhaSanXuat sp = db.NhaSanXuats.Find(id);
+            if (sp != null)
+            {
+                db.NhaSanXuats.Remove(sp);
+                db.SaveChanges();
+            }
+        }
+        public IEnumerable<NhaSanXuat> searchbyName(string name)
+        {
+            var lst = db.Database.SqlQuery<NhaSanXuat>("Select * from NhaSanXuat where tennhasanxuat like N'%" + name + "%'");
+            return lst;
+        }
+
     }
 }

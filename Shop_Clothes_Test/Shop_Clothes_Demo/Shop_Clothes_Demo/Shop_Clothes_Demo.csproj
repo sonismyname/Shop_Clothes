@@ -137,6 +137,8 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoaiSanPhamController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhaSanXuatController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhomMuaController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -152,6 +154,7 @@
     <Compile Include="Models\DAO\KhachHangDAO.cs" />
     <Compile Include="Models\DAO\LoaiSanPhamDAO.cs" />
     <Compile Include="Models\DAO\NhaSanXuatDAO.cs" />
+    <Compile Include="Models\DAO\NhomMuaDAO.cs" />
     <Compile Include="Models\DAO\PhanHoiDAO.cs" />
     <Compile Include="Models\DAO\SanPhamDAO.cs" />
     <Compile Include="Models\DAO\ThanhVienDAO.cs" />
@@ -430,6 +433,12 @@
     <Content Include="Areas\Admin\Views\LoaiSanPham\Add.cshtml" />
     <Content Include="Areas\Admin\Views\LoaiSanPham\Details.cshtml" />
     <Content Include="Areas\Admin\Views\LoaiSanPham\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaSanXuat\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaSanXuat\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaSanXuat\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaSanXuat\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NhomMua\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NhomMua\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -483,6 +492,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\LoaiSanPham\" />
+    <Folder Include="Content\NhaSanXuat\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

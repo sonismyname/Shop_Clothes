@@ -9,29 +9,28 @@ using System.Web.Mvc;
 
 namespace Shop_Clothes_Demo.Areas.Admin.Controllers
 {
-    public class LoaiSanPhamController : Controller
+    public class NhaSanXuatController : Controller
     {
-        // GET: Admin/LoaiSanPham
+        // GET: Admin/NhaSanXuat
         ShopModel db = new ShopModel();
-        LoaiSanPhamDAO lspdao = new LoaiSanPhamDAO();
+        NhaSanXuatDAO dao = new NhaSanXuatDAO();
         public ActionResult Index(int? page)
         {
             int pageS = 5;
             int pageN = (page ?? 1);
-            return View(lspdao.LoadLoaiSanPham(pageN, pageS));
+            return View(dao.LoadNhaSanXuat(pageN, pageS));
         }
         [HttpGet]
-        public ActionResult Add(LoaiSanPham lsp)
+        public ActionResult Add(NhaSanXuat nsx)
         {
-
-            return View(lsp);
+            return View(nsx);
         }
         [HttpPost]
-        public ActionResult Add(LoaiSanPham lsp, HttpPostedFileBase photo)
+        public ActionResult Add(NhaSanXuat nsx, HttpPostedFileBase photo)
         {
             if (photo == null)
             {
-                ViewBag.uploadlsp = "Cần Thêm Icon";
+                ViewBag.uploadnsx = "Cần Thêm Logo";
             }
 
             if (photo != null)
@@ -40,51 +39,51 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
                 {
                     if (photo.ContentType != "image/jpeg" && photo.ContentType != "image/png" && photo.ContentType != "image/gif")
                     {
-                        ViewBag.uploadlsp = "Hình Ảnh không hợp lệ!!!";
-                        return View(lsp);
+                        ViewBag.uploadnsx = "Hình Ảnh không hợp lệ!!!";
+                        return View(nsx);
                     }
                     else
                     {
                         var fileName = Path.GetFileName(photo.FileName);
-                        var path = Path.Combine(Server.MapPath("~/Content/LoaiSanPham"), fileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/NhaSanXuat"), fileName);
                         if (System.IO.File.Exists(path))
                         {
-                            lsp.Icon = fileName;
+                            nsx.Logo = fileName;
                         }
                         else
                         {
-                            lsp.Icon = fileName;
+                            nsx.Logo = fileName;
                             photo.SaveAs(path);
                         }
 
                     }
                 }
-                int ma = lspdao.Add(lsp);
-                return RedirectToAction("Index", "LoaiSanPham");
+                int ma = dao.Add(nsx);
+                return RedirectToAction("Index", "NhaSanXuat");
             }
-            return View(lsp);
+            return View(nsx);
         }
-        public ActionResult Delete(int malsp)
+        public ActionResult Delete(int mansx)
         {
-            lspdao.Delete(malsp);
+            dao.Delete(mansx);
             return RedirectToAction("Index");
         }
-        public ActionResult Details(int MaLoaiSanPham)
+        public ActionResult Details(int MaNhaSanXuat)
         {
-            LoaiSanPham lsp = db.LoaiSanPhams.Find(MaLoaiSanPham);
-            return View(lsp);
+            NhaSanXuat nsx = db.NhaSanXuats.Find(MaNhaSanXuat);
+            return View(nsx);
         }
-        public ActionResult Edit(int MaLoaiSanPham)
+        public ActionResult Edit(int MaNhaSanXuat)
         {
-            LoaiSanPham lsp = db.LoaiSanPhams.Find(MaLoaiSanPham);
-            Session["edit"] = lsp;
-            return View(lsp);
+            NhaSanXuat nsx = db.NhaSanXuats.Find(MaNhaSanXuat);
+            Session["edit"] = nsx;
+            return View(nsx);
         }
         [HttpPost]
-        public ActionResult Edit(LoaiSanPham lsp, HttpPostedFileBase photo)
+        public ActionResult Edit(NhaSanXuat lsp, HttpPostedFileBase photo)
         {
-            lsp.MaLoaiSanPham = (Session["edit"] as LoaiSanPham).MaLoaiSanPham;
-            lsp.Icon = (Session["edit"] as LoaiSanPham).Icon;
+            lsp.MaNhaSanXuat = (Session["edit"] as NhaSanXuat).MaNhaSanXuat;
+            lsp.Logo = (Session["edit"] as NhaSanXuat).Logo;
 
             Session["edit"] = null;
 
@@ -95,20 +94,20 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
                     // kiểm tra định dạng hình ảnh
                     if (photo.ContentType != "image/jpeg" && photo.ContentType != "image/png" && photo.ContentType != "image/gif")
                     {
-                        ViewBag.uploadlspe = "Hình Ảnh không hợp lệ!!!";
+                        ViewBag.uploadnsxe = "Hình Ảnh không hợp lệ!!!";
                         return View(lsp);
                     }
                     else
                     {
                         var fileName = Path.GetFileName(photo.FileName);
-                        var path = Path.Combine(Server.MapPath("~/Content/LoaiSanPham"), fileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/NhaSanXuat"), fileName);
                         if (System.IO.File.Exists(path))
                         {
-                            lsp.Icon = fileName;
+                            lsp.Logo = fileName;
                         }
                         else
                         {
-                            lsp.Icon = fileName;
+                            lsp.Logo = fileName;
                             photo.SaveAs(path);
                         }
                     }
@@ -120,7 +119,7 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
             }
             db.Entry(lsp).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Index", "LoaiSanPham");
+            return RedirectToAction("Index", "NhaSanXuat");
         }
     }
 }

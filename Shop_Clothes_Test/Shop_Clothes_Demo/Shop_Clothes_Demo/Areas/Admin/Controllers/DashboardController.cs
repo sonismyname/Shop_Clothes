@@ -17,27 +17,36 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
         SanPhamDAO spdao = new SanPhamDAO();
         public ActionResult Index(int? page)
         {
-            //var x = Session["admin"];
-            //if (x == null)
-            //{
-            //    Session["deny_access"] = "Hãy nhập thông tin tài khoản";
-            //    return RedirectToAction("Index", "Intro");
-            //}
-            //else
-            //{
-            int pageS = 5;
-            int pageN = (page ?? 1);
-            return View(spdao.LoadSanPhamAdmin(pageN, pageS));
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                int pageS = 5;
+                int pageN = (page ?? 1);
+                return View(spdao.LoadSanPhamAdmin(pageN, pageS));
 
-            //}
+            }
         }
         [HttpGet]
         public ActionResult AddProduct(SanPham sp)
         {
-            ViewBag.MaLoaiSanPham = new SelectList(db.LoaiSanPhams.OrderBy(n => n.TenLoaiSanPham), "MaLoaiSanPham", "TenLoaiSanPham");
-            ViewBag.MaNhaSanXuat = new SelectList(db.NhaSanXuats.OrderBy(n => n.TenNhaSanXuat), "MaNhaSanXuat", "TenNhaSanXuat");
-            ViewBag.MaNhom = new SelectList(db.NhomMuas.OrderBy(n => n.TenNhom), "MaNhom", "TenNhom");
-            return View(sp);
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                ViewBag.MaLoaiSanPham = new SelectList(db.LoaiSanPhams.OrderBy(n => n.TenLoaiSanPham), "MaLoaiSanPham", "TenLoaiSanPham");
+                ViewBag.MaNhaSanXuat = new SelectList(db.NhaSanXuats.OrderBy(n => n.TenNhaSanXuat), "MaNhaSanXuat", "TenNhaSanXuat");
+                ViewBag.MaNhom = new SelectList(db.NhomMuas.OrderBy(n => n.TenNhom), "MaNhom", "TenNhom");
+                return View(sp);
+            }          
         }
         [ValidateInput(false)]// tắt ktra mota của microsoft
         [HttpPost]
@@ -99,28 +108,56 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
         }
         public ActionResult Delete(int masp)
         {
-            spdao.Delete(masp);
-            return RedirectToAction("Index");
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                spdao.Delete(masp);
+                return RedirectToAction("Index");
+            }
+           
         }
         public ActionResult Details(int MaSanPham)
         {
-            SanPham sp = db.SanPhams.Find(MaSanPham);
-            ViewBag.tnsx = sp.NhaSanXuat.TenNhaSanXuat.ToString();
-            ViewBag.tlsp = sp.LoaiSanPham.TenLoaiSanPham.ToString();
-            return View(sp);
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                SanPham sp = db.SanPhams.Find(MaSanPham);
+                ViewBag.tnsx = sp.NhaSanXuat.TenNhaSanXuat.ToString();
+                ViewBag.tlsp = sp.LoaiSanPham.TenLoaiSanPham.ToString();
+                return View(sp);
+            }      
         }
         public ActionResult Edit(int MaSanPham)
         {
-            SanPham sp = db.SanPhams.Find(MaSanPham);
-            if (sp == null)
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
             {
-                return HttpNotFound();
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
             }
-            ViewBag.MLSP = new SelectList(db.LoaiSanPhams.OrderBy(n => n.TenLoaiSanPham), "MaLoaiSanPham", "TenLoaiSanPham", sp.MaLoaiSanPham);
-            ViewBag.MNSX = new SelectList(db.NhaSanXuats.OrderBy(n => n.TenNhaSanXuat), "MaNhaSanXuat", "TenNhaSanXuat", sp.MaNhaSanXuat);
-            ViewBag.MN = new SelectList(db.NhomMuas.OrderBy(n => n.TenNhom), "MaNhom", "TenNhom", sp.MaNhom);
-            Session["edit"] = sp;
-            return View(sp);
+            else
+            {
+                SanPham sp = db.SanPhams.Find(MaSanPham);
+                if (sp == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.MLSP = new SelectList(db.LoaiSanPhams.OrderBy(n => n.TenLoaiSanPham), "MaLoaiSanPham", "TenLoaiSanPham", sp.MaLoaiSanPham);
+                ViewBag.MNSX = new SelectList(db.NhaSanXuats.OrderBy(n => n.TenNhaSanXuat), "MaNhaSanXuat", "TenNhaSanXuat", sp.MaNhaSanXuat);
+                ViewBag.MN = new SelectList(db.NhomMuas.OrderBy(n => n.TenNhom), "MaNhom", "TenNhom", sp.MaNhom);
+                Session["edit"] = sp;
+                return View(sp);
+            }
         }
         [ValidateInput(false)]// tắt ktra mota của microsoft ở mô tả
         [HttpPost]
@@ -192,6 +229,24 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
             db.Entry(sp).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index", "Dashboard");
+        }
+        public ActionResult ThongTinTaiKhoan()
+        {
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                return View(x);
+            }
+        }
+        public ActionResult SignOut()
+        {
+            Session["admin"] = null;
+            return RedirectToAction("Index", "../Intro/Index");
         }
     }
 

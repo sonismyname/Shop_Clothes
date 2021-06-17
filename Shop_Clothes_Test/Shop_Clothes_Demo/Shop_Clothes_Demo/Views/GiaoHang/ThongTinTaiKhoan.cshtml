@@ -1,10 +1,10 @@
 ﻿@using Shop_Clothes_Demo.Models
 @{
-    ViewBag.Title = "thongTinTaiKhoan";
-    Layout = "~/Views/Shared/_LayoutAccPage1.cshtml";
+    ThanhVien tv = Session["giaohang"] as ThanhVien;
 }
-@{ 
-    ThanhVien tv = Session["username"] as ThanhVien;
+@{
+    ViewBag.Title = "ThongTinTaiKhoan";
+    Layout = "~/Views/Shared/_LayoutDeliverPage1.cshtml";
 }
 
 <script type="application/x-javascript">
@@ -19,19 +19,19 @@
     <div class="login-tab">
         <div class="user-login">
             <h3>THÔNG TIN CÁ NHÂN</h3>
-            <form action="" method="post">
+            <form action="#" method="post">
                 <p>Họ và tên</p>
-                <input type="text" name="hoten" value="@tv.HoTen" >
+                <input type="text" name="hoten" value="@tv.HoTen">
                 <p>Số điện thoại</p>
-                <input type="text" name="sdt" value="@tv.SoDienThoai" >
+                <input type="text" name="sdt" value="@tv.SoDienThoai">
                 <p>Địa chỉ</p>
                 <input type="text" name="diachi" value="@tv.DiaChi">
                 <p>Email</p>
-                <input type="text" name="email" value="@tv.Email" >
+                <input type="text" name="email" value="@tv.Email">
                 @*<p>Tài khoản</p>
-                <input type="text" name="taikhoan" value="@tv.TaiKhoan">*@
+                    <input type="text" name="taikhoan" value="@tv.TaiKhoan">*@
                 <p>Thành viên</p>
-                <input type="text" name="loaitv" value="@ViewBag.LoaiTV" >
+                <input type="text" name="loaitv" value="Tranfer">
 
                 @*<h4 style="color:red"> @Session["thongbao"] </h4>*@
                 <div class="user-grids">
@@ -45,7 +45,5 @@
             </form>
         </div>
     </div>
-    </div>
-
-
+</div>
 

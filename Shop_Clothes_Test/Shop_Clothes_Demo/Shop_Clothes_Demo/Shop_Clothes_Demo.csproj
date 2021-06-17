@@ -140,6 +140,7 @@
     <Compile Include="Areas\Admin\Controllers\NhaSanXuatController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhomMuaController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\GiaoHangController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntroController.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Models\ChiTietDonHang.cs" />
     <Compile Include="Models\DAO\ChiTietDonHangDAO.cs" />
     <Compile Include="Models\DAO\DonDatHangDAO.cs" />
+    <Compile Include="Models\DAO\DonHangDAO.cs" />
     <Compile Include="Models\DAO\KhachHangDAO.cs" />
     <Compile Include="Models\DAO\LoaiSanPhamDAO.cs" />
     <Compile Include="Models\DAO\NhaSanXuatDAO.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="Models\DAO\SanPhamDAO.cs" />
     <Compile Include="Models\DAO\ThanhVienDAO.cs" />
     <Compile Include="Models\DonDatHang.cs" />
+    <Compile Include="Models\DTO\DonHangDTO.cs" />
     <Compile Include="Models\DTO\SanPhamDTO.cs" />
     <Compile Include="Models\ItemGioHang.cs" />
     <Compile Include="Models\KhachHang.cs" />
@@ -439,6 +442,7 @@
     <Content Include="Areas\Admin\Views\NhaSanXuat\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\NhomMua\Index.cshtml" />
     <Content Include="Areas\Admin\Views\NhomMua\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\ThongTinTaiKhoan.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -487,6 +491,10 @@
     <Content Include="Views\Login\ListDonHang.cshtml" />
     <Content Include="Views\Login\ChiTietDonHang.cshtml" />
     <Content Include="Views\Intro\Search.cshtml" />
+    <Content Include="Views\GiaoHang\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutDeliverPage1.cshtml" />
+    <Content Include="Views\GiaoHang\ThongTinTaiKhoan.cshtml" />
+    <Content Include="Views\GiaoHang\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

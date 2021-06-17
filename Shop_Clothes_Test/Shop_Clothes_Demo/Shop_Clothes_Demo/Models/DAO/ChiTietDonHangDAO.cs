@@ -26,5 +26,14 @@ namespace Shop_Clothes_Demo.Models.DAO
             var lst = db.Database.SqlQuery<ChiTietDonHang>(que);
             return lst;
         }
+        public List<ChiTietDonHang> ListDH(int MaDonDH)
+        {
+            string que = "select ct.MaChiTietDDH, ct.MaDonDatHang, ct.MaSanPham, ct.TenSanPham, ct.SoLuong, ct.DonGia " +
+               "from ChiTietDonHang ct, DonDatHang dh " +
+               "where ct.MaDonDatHang = dh.MaDonDatHang and dh.MaDonDatHang = " + MaDonDH + "";
+            var lst = db.Database.SqlQuery<ChiTietDonHang>(que);
+            List<ChiTietDonHang> ct = lst.ToList();
+            return ct;
+        }
     }
 }

@@ -222,6 +222,8 @@ namespace Shop_Clothes_Demo.Controllers
             ddh.NgayDat = DateTime.Now;
             DateTime ngayGiao = DateTime.Now;
             ngayGiao = ngayGiao.AddDays(2);
+            ddh.DaThanhToan = false;
+            ddh.TinhTrangGiaoHang = "Đang giao";
             ddh.NgayGiaoDuKien = ngayGiao;
             int maDonHang = daodh.Add(ddh);
             //lưu chi tiết đơn hàng

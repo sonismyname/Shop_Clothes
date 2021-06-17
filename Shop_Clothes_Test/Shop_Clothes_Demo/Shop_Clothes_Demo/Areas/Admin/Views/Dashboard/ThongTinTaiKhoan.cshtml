@@ -1,0 +1,67 @@
+﻿@model Shop_Clothes_Demo.Models.ThanhVien
+
+@{
+    ViewBag.Title = "ThongTinTaiKhoan";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>ThongTinTaiKhoan</h2>
+
+<div>
+    <h4>ThanhVien</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tài Khoản: 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaiKhoan)
+        </dd>
+
+        <dt>
+            Họ tên: 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTen)
+        </dd>
+
+        <dt>
+            Số điện thoại:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoDienThoai)
+        </dd>
+
+        <dt>
+            Địa chỉ:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            Email:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            Loại thành viên:
+        </dt>
+
+        <dd>
+            Quản lý
+        </dd>
+
+    </dl>
+</div>
+<p>
+    
+    @Html.ActionLink("Chỉnh Sửa", "Edit", new { id = Model.MaThanhVien }, new { @class = "btn btn-success" })       @Html.ActionLink("Quay Lại", "Index", null, new { @class = "btn btn-default" })     @Html.ActionLink("Đăng Xuất", "SignOut", null, new { @class = "btn btn-danger" })
+</p>

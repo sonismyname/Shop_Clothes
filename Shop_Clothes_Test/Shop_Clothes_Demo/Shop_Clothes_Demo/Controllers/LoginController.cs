@@ -10,6 +10,7 @@ namespace Shop_Clothes_Demo.Controllers
 {
     public class LoginController : Controller
     {
+        ShopModel db = new ShopModel();
         ThanhVienDAO daotv = new ThanhVienDAO();
         KhachHangDAO daokh = new KhachHangDAO();
         // GET: Login
@@ -105,6 +106,8 @@ namespace Shop_Clothes_Demo.Controllers
         {
             if (Session["username"] != null)
             {
+
+                ViewBag.LoaiTV = (db.LoaiThanhViens.Find((Session["username"] as ThanhVien).MaLoaiThanhVien)).TenLoaiThanhVien;
                 return View();
             }
             else
@@ -126,11 +129,17 @@ namespace Shop_Clothes_Demo.Controllers
         public ActionResult ChiTietDonHang(int MaDonDatHang)
         {
             ChiTietDonHangDAO dao = new ChiTietDonHangDAO();
-            return View(dao.Detail(MaDonDatHang));
+            if(Session["username"]!=null)
+            {
+                return View(dao.Detail(MaDonDatHang));
+            }
+            return RedirectToAction("Index", "Intro");
         }
+
         public ActionResult SignOut()
         {
             Session["username"] = null;
+            Session["giaohang"] = null;
             return RedirectToAction("Index", "Intro");
         }
     }

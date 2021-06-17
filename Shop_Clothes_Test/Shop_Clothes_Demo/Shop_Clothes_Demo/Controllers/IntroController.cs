@@ -25,6 +25,7 @@ namespace Shop_Clothes_Demo.Controllers
         public ActionResult Logout()
         {
             Session["username"] = null;
+            Session["giaohang"] = null;
             return RedirectToAction("Index");
         }
         [ChildActionOnly]
@@ -44,10 +45,39 @@ namespace Shop_Clothes_Demo.Controllers
             string sMatKhau = f["txtMatKhau"];
 
             ThanhVien tv = db.ThanhViens.SingleOrDefault(n => n.TaiKhoan == sTaiKhoan && n.MatKhau == sMatKhau);
+              
             if (tv != null)
             {
-                Session["username"] = tv;
-                return RedirectToAction("Index");
+                switch (tv.MaLoaiThanhVien)
+                {
+                    case 1:
+                        {
+                            Session["admin"] = tv;
+                            return RedirectToAction("Index", "Admin/Dashboard");
+                            
+                        }
+                    case 2:
+                        {
+                            Session["username"] = tv;
+                            return RedirectToAction("Index");
+                            
+                        }
+                    case 3:
+                        {
+                            Session["username"] = tv;
+                            return RedirectToAction("Index");
+                            
+                        }
+                    case 4:
+                        {
+                            Session["giaohang"] = tv;
+                            return RedirectToAction("Index", "GiaoHang");
+                        }
+                    default:
+                        {
+                            return RedirectToAction("Index");
+                        }
+                }
             }
             return RedirectToAction("Index");
         }

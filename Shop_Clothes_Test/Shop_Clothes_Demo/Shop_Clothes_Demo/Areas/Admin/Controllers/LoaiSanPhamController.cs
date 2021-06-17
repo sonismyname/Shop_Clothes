@@ -16,15 +16,32 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
         LoaiSanPhamDAO lspdao = new LoaiSanPhamDAO();
         public ActionResult Index(int? page)
         {
-            int pageS = 5;
-            int pageN = (page ?? 1);
-            return View(lspdao.LoadLoaiSanPham(pageN, pageS));
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                int pageS = 5;
+                int pageN = (page ?? 1);
+                return View(lspdao.LoadLoaiSanPham(pageN, pageS));
+            }
         }
         [HttpGet]
         public ActionResult Add(LoaiSanPham lsp)
         {
-
-            return View(lsp);
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                return View(lsp);
+            }
         }
         [HttpPost]
         public ActionResult Add(LoaiSanPham lsp, HttpPostedFileBase photo)
@@ -66,19 +83,46 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
         }
         public ActionResult Delete(int malsp)
         {
-            lspdao.Delete(malsp);
-            return RedirectToAction("Index");
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                lspdao.Delete(malsp);
+                return RedirectToAction("Index");
+            }
         }
         public ActionResult Details(int MaLoaiSanPham)
         {
-            LoaiSanPham lsp = db.LoaiSanPhams.Find(MaLoaiSanPham);
-            return View(lsp);
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                LoaiSanPham lsp = db.LoaiSanPhams.Find(MaLoaiSanPham);
+                return View(lsp);
+            }
         }
         public ActionResult Edit(int MaLoaiSanPham)
         {
-            LoaiSanPham lsp = db.LoaiSanPhams.Find(MaLoaiSanPham);
-            Session["edit"] = lsp;
-            return View(lsp);
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                LoaiSanPham lsp = db.LoaiSanPhams.Find(MaLoaiSanPham);
+                Session["edit"] = lsp;
+                return View(lsp);
+            }
         }
         [HttpPost]
         public ActionResult Edit(LoaiSanPham lsp, HttpPostedFileBase photo)

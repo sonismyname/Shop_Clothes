@@ -1,0 +1,82 @@
+﻿@using PagedList.Mvc
+@model IEnumerable<Shop_Clothes_Demo.Models.DTO.DonHangDTO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDeliverPage1.cshtml";
+}
+
+<h2>Thông tin đơn hàng</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Tên khách hàng
+        </th>
+        <th>
+            Địa chỉ
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Số điện thoại
+        </th>
+        <th>
+            Mã đơn
+        </th>
+        <th>
+            Ngày giao
+        </th>
+        <th>
+            Tình trạng giao hàng
+        </th>
+
+        <th width="230"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhachHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoDienThoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDonDatHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayGiaoDuKien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TinhTrangGiaoHang)
+            </td>
+            <td>
+                @{
+                    if (item.TinhTrangGiaoHang.Equals("Đã nhận"))
+                    {
+
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Đã Nhận Hàng", "DaNhan", new { id = item.MaDonDatHang }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Không Nhận Hàng", "KhongNhan", new { id = item.MaDonDatHang }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Giao Sau", "GiaoSau", new { id = item.MaDonDatHang }, new { @class = "btn btn-default" })
+                    }
+                }
+
+
+            </td>
+        </tr>
+    }
+
+</table>
+

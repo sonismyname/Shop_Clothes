@@ -16,14 +16,32 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
         NhaSanXuatDAO dao = new NhaSanXuatDAO();
         public ActionResult Index(int? page)
         {
-            int pageS = 5;
-            int pageN = (page ?? 1);
-            return View(dao.LoadNhaSanXuat(pageN, pageS));
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                int pageS = 5;
+                int pageN = (page ?? 1);
+                return View(dao.LoadNhaSanXuat(pageN, pageS));
+            }
         }
         [HttpGet]
         public ActionResult Add(NhaSanXuat nsx)
         {
-            return View(nsx);
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                return View(nsx);
+            }
         }
         [HttpPost]
         public ActionResult Add(NhaSanXuat nsx, HttpPostedFileBase photo)
@@ -65,19 +83,46 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
         }
         public ActionResult Delete(int mansx)
         {
-            dao.Delete(mansx);
-            return RedirectToAction("Index");
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                dao.Delete(mansx);
+                return RedirectToAction("Index");
+            }
         }
         public ActionResult Details(int MaNhaSanXuat)
         {
-            NhaSanXuat nsx = db.NhaSanXuats.Find(MaNhaSanXuat);
-            return View(nsx);
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                NhaSanXuat nsx = db.NhaSanXuats.Find(MaNhaSanXuat);
+                return View(nsx);
+            }
         }
         public ActionResult Edit(int MaNhaSanXuat)
         {
-            NhaSanXuat nsx = db.NhaSanXuats.Find(MaNhaSanXuat);
-            Session["edit"] = nsx;
-            return View(nsx);
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                NhaSanXuat nsx = db.NhaSanXuats.Find(MaNhaSanXuat);
+                Session["edit"] = nsx;
+                return View(nsx);
+            }
         }
         [HttpPost]
         public ActionResult Edit(NhaSanXuat lsp, HttpPostedFileBase photo)

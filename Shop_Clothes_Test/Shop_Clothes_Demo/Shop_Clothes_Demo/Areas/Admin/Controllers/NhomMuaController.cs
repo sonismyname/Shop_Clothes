@@ -15,14 +15,32 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
         NhomMuaDAO dao = new NhomMuaDAO();
         public ActionResult Index(int? page)
         {
-            int pageS = 5;
-            int pageN = (page ?? 1);
-            return View(dao.LoadNhomMua(pageN, pageS));
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                int pageS = 5;
+                int pageN = (page ?? 1);
+                return View(dao.LoadNhomMua(pageN, pageS));
+            }
         }
         [HttpGet]
         public ActionResult Add(NhomMua nsx)
         {
-            return View(nsx);
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                return View(nsx);
+            }
         }
         [HttpPost]
         public ActionResult Add(NhomMua nsx, FormCollection f)
@@ -38,15 +56,33 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
         }
         public ActionResult Delete(int mn)
         {
-            Session["nhommua"] = null;
-            dao.Delete(mn);
-            return RedirectToAction("Index");
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                Session["nhommua"] = null;
+                dao.Delete(mn);
+                return RedirectToAction("Index");
+            }
         }
         public ActionResult Edit(int MaNhom)
         {
-            NhomMua nsx = db.NhomMuas.Find(MaNhom);
-            Session["edit"] = nsx;
-            return View(nsx);
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                NhomMua nsx = db.NhomMuas.Find(MaNhom);
+                Session["edit"] = nsx;
+                return View(nsx);
+            }
         }
         [HttpPost]
         public ActionResult Edit(NhomMua lsp)

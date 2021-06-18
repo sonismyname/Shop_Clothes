@@ -1,0 +1,79 @@
+﻿@model Shop_Clothes_Demo.Models.ThanhVien
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Details</h2>
+@using (Html.BeginForm("Details", "ThanhVien", FormMethod.Post))
+{
+    <div>
+        <h4>ThanhVien</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Tài Khoản:
+            </dt>
+
+            <dd>
+                <input type="text" name="HoTen" class="form-control" value="@Model.TaiKhoan" readonly>
+            </dd>
+
+            <dt>
+                <br />
+                Họ tên:
+            </dt>
+
+            <dd>
+                <br />
+                <input type="text" name="HoTen" class="form-control" value="@Model.HoTen" readonly>
+            </dd>
+
+            <dt>
+                <br />
+                Số Điện Thoại
+            </dt>
+
+            <dd>
+                <br />
+                <input type="text" name="HoTen" class="form-control" value="@Model.SoDienThoai" readonly>
+            </dd>
+
+            <dt>
+                <br />
+                Địa Chỉ
+            </dt>
+
+            <dd>
+                <br />
+                <input type="text" name="HoTen" class="form-control" value="@Model.DiaChi" readonly>
+            </dd>
+
+            <dt>
+                <br />
+                Email
+            </dt>
+
+            <dd>
+                <br />
+                <input type="text" name="HoTen" class="form-control" value="@Model.Email" readonly>
+            </dd>
+
+            <dt>
+                <br />
+                Loại Thành Viên
+            </dt>
+
+            <dd>
+                <br />
+                @Html.DropDownList("MaLoaiThanhVien", (SelectList)ViewBag.LTV, new { @class = "form-control" })
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        <input type="submit" class="btn btn-success" value="Sửa"/>
+        @Html.ActionLink("Quay Về", "Index", null, new { @class = "btn btn-info" })
+    </p>
+}

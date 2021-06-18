@@ -116,7 +116,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <h1><a class="navbar-brand" href="index.html"><span class="fa fa-area-chart"></span> HAOC<span class="dashboard_text">Bảng Điều Khiển</span></a></h1>
+                        <h1><a class="navbar-brand" href=""><span class="fa fa-area-chart"></span> HAOC'Store<span class="dashboard_text">Bảng Điều Khiển</span></a></h1>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="sidebar-menu">
@@ -146,8 +146,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href=""><i class="fa fa-angle-right"></i> Thành Viên</a></li>
-                                    <li><a href=""><i class="fa fa-angle-right"></i> Loại Thành Viên</a></li>
+                                    <li><a href="@Url.Action("Index","ThanhVien")"><i class="fa fa-angle-right"></i> Thành Viên</a></li>
+                                    <li><a href="@Url.Action("Index","LoaiThanhVien")"><i class="fa fa-angle-right"></i> Loại Thành Viên</a></li>
                                 </ul>
                             </li>
 
@@ -221,7 +221,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             </ul>
         </li>*@
                             <li class="header">Đơn Hàng</li>
-                            <li><a href="#"><i class="fa fa-angle-right text-red"></i> <span>Thông Tin Đơn Hàng</span></a></li>
+                            <li><a href="@Url.Action("Index","DonHang")"><i class="fa fa-angle-right text-red"></i> <span>Thông Tin Đơn Hàng</span></a></li>
                             <li><a href="#"><i class="fa fa-angle-right text-yellow"></i> <span>Thống Kê</span></a></li>
                             <li class="treeview">
                                 <a href="@Url.Action("SignOut", "Dashboard")">
@@ -242,9 +242,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                 <!--toggle button start-->
                 <button id="showLeftPush"><i class="fa fa-bars"></i></button>
                 <!--toggle button end-->
-                <div class="profile_details_left">
+                <!--<div class="profile_details_left">-->
                     <!--notifications of menu start -->
-                    <ul class="nofitications-dropdown">
+                    <!--<ul class="nofitications-dropdown">
                         <li class="dropdown head-dpdn">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">4</span></a>
                             <ul class="dropdown-menu">
@@ -416,15 +416,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         </li>
                     </ul>
                     <div class="clearfix"> </div>
-                </div>
+                </div>-->
                 <!--notification menu end -->
                 <div class="clearfix"> </div>
             </div>
-            <div class="header-right">
+            <!--<div class="header-right">-->
 
 
                 <!--search-box-->
-                <div class="search-box">
+                <!--<div class="search-box">
                     <form class="input">
                         <input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
                         <label class="input__label" for="input-31">
@@ -433,9 +433,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </svg>
                         </label>
                     </form>
-                </div><!--//end-search-box-->
+                </div>--><!--//end-search-box-->
 
-                <div class="profile_details">
+                <!--<div class="profile_details">
                     <ul>
                         <li class="dropdown profile_details_drop">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -460,7 +460,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     </ul>
                 </div>
                 <div class="clearfix"> </div>
-            </div>
+            </div>-->
             <div class="clearfix"> </div>
         </div>
         <!-- //header-ends -->
@@ -854,9 +854,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             </div>-->
         </div>
         <!--footer-->
-        <div class="footer">
+        @*<div class="footer">
             <p>&copy; 2018 Glance Design Dashboard. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">w3layouts</a></p>
-        </div>
+        </div>*@
         <!--//footer-->
     </div>
 

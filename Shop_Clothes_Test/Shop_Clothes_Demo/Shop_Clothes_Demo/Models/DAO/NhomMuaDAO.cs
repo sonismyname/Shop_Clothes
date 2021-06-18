@@ -45,5 +45,11 @@ namespace Shop_Clothes_Demo.Models.DAO
             var lst = db.Database.SqlQuery<NhomMua>("Select * from NhomMua where tennhom like N'%" + name + "%'");
             return lst;
         }
+        public IEnumerable<NhomMua> TimKiemNM(int Pagenum, int Pagesiz, string tukhoa)
+        {
+            var lst = db.Database.SqlQuery<NhomMua>("select * from NhomMua where TenNhom like N'%" + tukhoa + "%'")
+                .ToPagedList<NhomMua>(Pagenum, Pagesiz);
+            return lst;
+        }
     }
 }

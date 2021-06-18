@@ -45,5 +45,12 @@ namespace Shop_Clothes_Demo.Models.DAO
             var lst = db.Database.SqlQuery<LoaiSanPham>("Select * from LoaiSanPham where tenloaisanpham like N'%" + name + "%'");
             return lst;
         }
+        public IEnumerable<LoaiSanPham> TimKiemLoaiSanPham(int Pagenum, int Pagesiz, string tukhoa)
+        {
+            var lst = db.Database.SqlQuery<LoaiSanPham>("select * from LoaiSanPham where TenLoaiSanPham like N'%"+tukhoa+"%'")
+                .ToPagedList<LoaiSanPham>(Pagenum, Pagesiz);
+            return lst;
+        }
+
     }
 }

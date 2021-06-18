@@ -8,11 +8,10 @@ using System.Web.Mvc;
 
 namespace Shop_Clothes_Demo.Areas.Admin.Controllers
 {
-    public class NhomMuaController : Controller
+    public class LoaiThanhVienController : Controller
     {
-        // GET: Admin/NhomMua
         ShopModel db = new ShopModel();
-        NhomMuaDAO dao = new NhomMuaDAO();
+        LoaiThanhVienDAO dao = new LoaiThanhVienDAO();
         public ActionResult Index(int? page)
         {
             ThanhVien x = Session["admin"] as ThanhVien;
@@ -29,7 +28,7 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
             }
         }
         [HttpGet]
-        public ActionResult Add(NhomMua nsx)
+        public ActionResult Add(LoaiThanhVien nsx)
         {
             ThanhVien x = Session["admin"] as ThanhVien;
             if (x == null)
@@ -43,18 +42,24 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Add(NhomMua nsx, FormCollection f)
+        public ActionResult Add(LoaiThanhVien nsx, FormCollection f)
         {
-            if(f["TenNhom"] == ""||f["TenNhom"] == null)
+            if (f["TenLoaiThanhVien"] == "" || f["TenLoaiThanhVien"] == null)
             {
-                Session["nhommua"] = "Không Thể Thiếu Tên Nhóm!!!";
-                return RedirectToAction("Index", "NhomMua");
+                Session["Ltv"] = "Không Thể Thiếu Tên Loại!!!";
+                return RedirectToAction("Index", "LoaiThanhVien");
             }
-            Session["nhommua"] = null;
+            if (f["UuDai"] == "" || f["UuDai"] == null)
+            {
+                Session["uudai"] = "Không Thể Thiếu Ưu Đãi!!!";
+                return RedirectToAction("Index", "LoaiThanhVien");
+            }
+            Session["Ltv"] = null;
+            Session["uudai"] = null;
             int ma = dao.Add(nsx);
-            return RedirectToAction("Index", "NhomMua");
+            return RedirectToAction("Index", "LoaiThanhVien");
         }
-        public ActionResult Delete(int mn)
+        public ActionResult Delete(int ltv)
         {
             ThanhVien x = Session["admin"] as ThanhVien;
             if (x == null)
@@ -64,12 +69,12 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
             }
             else
             {
-                Session["nhommua"] = null;
-                dao.Delete(mn);
+                Session["Ltv"] = null;
+                dao.Delete(ltv);
                 return RedirectToAction("Index");
             }
         }
-        public ActionResult Edit(int MaNhom)
+        public ActionResult Edit(int id)
         {
             ThanhVien x = Session["admin"] as ThanhVien;
             if (x == null)
@@ -79,15 +84,15 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
             }
             else
             {
-                NhomMua nsx = db.NhomMuas.Find(MaNhom);
+                LoaiThanhVien nsx = db.LoaiThanhViens.Find(id);
                 Session["edit"] = nsx;
                 return View(nsx);
             }
         }
         [HttpPost]
-        public ActionResult Edit(NhomMua lsp)
+        public ActionResult Edit(LoaiThanhVien lsp)
         {
-            lsp.MaNhom = (Session["edit"] as NhomMua).MaNhom;
+            lsp.MaLoaiThanhVien = (Session["edit"] as LoaiThanhVien).MaLoaiThanhVien;
             Session["edit"] = null;
 
             db.Entry(lsp).State = System.Data.Entity.EntityState.Modified;

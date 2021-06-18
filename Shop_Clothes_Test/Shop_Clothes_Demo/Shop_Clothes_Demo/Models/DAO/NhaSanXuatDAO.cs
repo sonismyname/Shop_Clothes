@@ -67,6 +67,12 @@ namespace Shop_Clothes_Demo.Models.DAO
             var lst = db.Database.SqlQuery<NhaSanXuat>("Select * from NhaSanXuat where tennhasanxuat like N'%" + name + "%'");
             return lst;
         }
+        public IEnumerable<NhaSanXuat> TimKiemNSX(int Pagenum, int Pagesiz, string tukhoa)
+        {
+            var lst = db.Database.SqlQuery<NhaSanXuat>("select * from NhaSanXuat where TenNhaSanXuat like N'%" + tukhoa + "%'")
+                .ToPagedList<NhaSanXuat>(Pagenum, Pagesiz);
+            return lst;
+        }
 
     }
 }

@@ -19,6 +19,7 @@ namespace Shop_Clothes_Demo.Models.DTO
 
         public int MaDonDatHang { get; set; }
 
+        public DateTime NgayDat { get; set; }
         public DateTime NgayGiaoDuKien { get; set; }
 
         public string TinhTrangGiaoHang { get; set; }

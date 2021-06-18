@@ -63,15 +63,14 @@ namespace Shop_Clothes_Demo.Controllers
                 return RedirectToAction("Register", "Login");
             }
             ThanhVien tv = new ThanhVien();
-            //tv.MaLoaiThanhVien=1; thêm khi nào có mã loại thành viên
+            tv.MaLoaiThanhVien=2;
             tv.TaiKhoan = f["taikhoan"];
             tv.HoTen = f["hoten"];
             tv.DiaChi = f["diachi"];
             tv.SoDienThoai = f["sdt"];
             tv.MatKhau = f["matkhau"];
             tv.Email = f["email"];
-            int maThanhVien = 0;
-            maThanhVien = daotv.Add(tv);
+            int maThanhVien = daotv.Add(tv);
             if(maThanhVien != -1)
             {
                 //thêm thành công

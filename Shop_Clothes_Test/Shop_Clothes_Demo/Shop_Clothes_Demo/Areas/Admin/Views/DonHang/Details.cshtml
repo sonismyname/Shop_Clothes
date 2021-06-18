@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Shop_Clothes_Demo.Models.ChiTietDonHang>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Chi Tiết Đơn Hàng</h2>
+<br/>
+<table class="table" border="1">
+    <tr style="background-color:aquamarine">
+        <th>
+            Mã Đơn Hàng
+        </th>
+        <th>
+            Mã Sản Phẩm
+        </th>
+        <th>
+            Tên Sản Phẩm
+        </th>
+        <th>
+            Hình Ảnh
+        </th>
+        <th>
+            Số Lượng
+        </th>
+        <th>
+            Đơn Giá
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDonDatHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaSanPham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSanPham)
+            </td>
+            <td>
+                <img src="@Url.Content("~/Content/SanPham/"+item.SanPham.HinhAnh)" width="100" height="120" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonGia)
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<p>
+    @Html.ActionLink("Quay Lại", "Index", null, new { @class = "btn btn-info" })
+</p>

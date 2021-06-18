@@ -1,12 +1,11 @@
-﻿
-@using PagedList.Mvc
-@model PagedList.IPagedList<Shop_Clothes_Demo.Models.LoaiSanPham>
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Shop_Clothes_Demo.Models.NhomMua>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
 }
 
-@using (Html.BeginForm("GetKey", "LoaiSanPham", FormMethod.Post, new { @class = "input" }))
+@using (Html.BeginForm("GetKey", "NhomMua", FormMethod.Post, new { @class = "input" }))
 {
     <div class=" form-group">
         <div class="col-md-10">
@@ -20,47 +19,41 @@
 <br />
 <br />
 <br />
+
 <p>
-    @Html.ActionLink("Thêm Loại Sản Phẩm", "Add", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("Quay Lại", "Index", null, new { @class = "btn btn-primary" })
 </p>
 <br />
-<table class="table" border="1">
-    <tr style="background-color:aquamarine">
+<table class="table">
+    <tr>
         <th>
-            Tên Loại Sản Phẩm
+            Tên Nhóm
         </th>
-        <th>
-            Icon
-        </th>
-        <th width="230"></th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.TenLoaiSanPham)
+                @Html.DisplayFor(modelItem => item.TenNhom)
             </td>
             <td>
-                <img src="@Url.Content("~/Content/LoaiSanPham/"+item.Icon)" width="100" height="120" />
-            </td>
-            <td>
-                @Html.ActionLink("Sửa", "Edit", new { MaLoaiSanPham = item.MaLoaiSanPham }, new { @class = "btn btn-success" })
-                @Html.ActionLink("Chi Tiết", "Details", new { MaLoaiSanPham = item.MaLoaiSanPham }, new { @class = "btn btn-success" })
-                <button id="btnXoa_@item.MaLoaiSanPham" class="btn btn-danger">Xóa</button>
+                @Html.ActionLink("Sửa", "Edit", new { MaNhom = item.MaNhom }, new { @class = "btn btn-success" })
+                <button id="btnXoa_@item.MaNhom" class="btn btn-danger">Xóa</button>
                 <link rel="stylesheet" href="~/Content/Login/css/style.css" type="text/css" media="all" />
-                <div id="@item.MaLoaiSanPham" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); z-index: 999; display: none;">
-                    @using (Html.BeginForm("Delete", "LoaiSanPham", new { @malsp = item.MaLoaiSanPham }))
+                <div id="@item.MaNhom" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); z-index: 999; display: none;">
+                    @using (Html.BeginForm("Delete", "NhomMua", new { @mn = item.MaNhom }))
                     {
                         <section class="w3l-login">
                             <div class="overlay">
                                 <div class="wrapper">
                                     <div class="form-section">
                                         <div style="clear:both; text-align:right; margin-bottom:0;">
-                                            <span id="Dong_@item.MaLoaiSanPham" class="btn btn-success">X</span>
+                                            <span id="Dong_@item.MaNhom" class="btn btn-success">X</span>
                                             <br />
                                         </div>
-                                        <h4>Bạn có muốn xóa: @item.TenLoaiSanPham</h4>
+                                        <h4>Bạn có muốn xóa: @item.TenNhom</h4>
                                         <button type="submit" class="btn btn-primary theme-button mt-2" style="background-color:red">Xóa</button>
                                     </div>
                                 </div>
@@ -75,12 +68,12 @@
             </td>
         </tr>
         <script type="text/javascript">
-                    $("#btnXoa_@item.MaLoaiSanPham").click(function () {
-                        $("#@item.MaLoaiSanPham").show();
+                    $("#btnXoa_@item.MaNhom").click(function () {
+                        $("#@item.MaNhom").show();
                     })
-                    $("#Dong_@item.MaLoaiSanPham").click(function () {
+                    $("#Dong_@item.MaNhom").click(function () {
                         //$("#popup_login").css("display", "block");
-                        $("#@item.MaLoaiSanPham").hide();
+                        $("#@item.MaNhom").hide();
                     })
         </script>
     }
@@ -89,6 +82,7 @@
 <div class="dlink">
     <center>
         Trang @(Model.PageCount<Model.PageNumber ? 0:Model.PageNumber)/@Model.PageCount
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+        @Html.PagedListPager(Model, page => Url.Action("NhomMua", new { page = page }))
     </center>
 </div>
+

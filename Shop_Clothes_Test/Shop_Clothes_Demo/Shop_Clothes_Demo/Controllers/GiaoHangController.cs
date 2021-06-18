@@ -25,13 +25,13 @@ namespace Shop_Clothes_Demo.Controllers
         }
         public ActionResult KhongNhan(int id)
         {
-            //lấy id xóa đơn hàng, cập nhật lại số lượng tồn, 
+            //lấy id đơn hàng, cập nhật lại số lượng tồn, đổi trạng thái thành không nhận hàng
             
             DonDatHang dh = db.DonDatHangs.Find(id);
             if(dh!= null)
             {
-                //Xóa đơn hàng
-                db.DonDatHangs.Remove(dh);
+                //Đổi Trạng Thái Thành Không Nhận Hàng
+                dh.TinhTrangGiaoHang = "Khách không nhận";
                 db.SaveChanges();
                 //Cập nhật số lượng tồn và số lượng bán
                 ChiTietDonHangDAO daoCT = new ChiTietDonHangDAO();
@@ -74,9 +74,8 @@ namespace Shop_Clothes_Demo.Controllers
                 DateTime date = dh.NgayGiaoDuKien.Value;
                 
                 dh.NgayGiaoDuKien = date.AddDays(1);
-                db.SaveChanges();
+                db.SaveChanges(); 
             }    
-
             return RedirectToAction("Index", "GiaoHang");
         }
         public ActionResult ThongTinTaiKhoan()

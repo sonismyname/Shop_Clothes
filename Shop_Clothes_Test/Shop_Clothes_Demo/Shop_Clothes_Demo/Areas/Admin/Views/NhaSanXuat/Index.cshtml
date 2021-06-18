@@ -5,7 +5,19 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2>Nhà Sản Xuất</h2>
+@using (Html.BeginForm("GetKey", "NhaSanXuat", FormMethod.Post, new { @class = "input" }))
+{
+    <div class=" form-group">
+        <div class="col-md-10">
+            <input type="text" placeholder="Tìm Kiếm..." class="form-control" name="tukhoa">
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Tìm Kiếm" class="btn btn-info" />
+        </div>
+    </div>
+}
+<br />
+<br />
 <br />
 
 <p>

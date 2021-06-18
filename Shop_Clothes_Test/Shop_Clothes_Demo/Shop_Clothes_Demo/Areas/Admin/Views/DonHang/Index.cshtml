@@ -1,0 +1,113 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Shop_Clothes_Demo.Models.DTO.DonHangDTO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+@using (Html.BeginForm("GetKey", "DonHang", FormMethod.Post, new { @class = "input" }))
+{
+<div class=" form-group">
+    <div class="col-md-2">
+        <input type="text" placeholder="Tìm Kiếm Mã Đơn Hàng..." class="form-control" name="tukhoa">
+    </div>
+    <div class="col-md-1">
+        <label class="form-control-static">Từ: </label>
+    </div>
+    <div class="col-md-2">
+        <input type="date" class="form-control" name="ngaytrc">
+    </div>
+    <div class="col-md-1">
+        <label class="form-control-static">Đến: </label>
+    </div>
+    <div class="col-md-2">
+        <input type="date" class="form-control" name="ngaysau">
+    </div>
+    <div class="col-md-2">
+        <select class="form-control" name="tinhtrang">
+            <option>Tất cả</option>
+            <option>Đã nhận</option>
+            <option>Đang giao</option>
+            <option>Khách không nhận</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <input type="submit" value="Tìm Kiếm" class="btn btn-info" />
+    </div>
+</div>
+}
+<br />
+<br />
+<h2>Thông tin đơn hàng</h2>
+<br />
+<table class="table" border="1">
+    <tr style="background-color:aquamarine">
+        <th>
+            Tên khách hàng
+        </th>
+        <th>
+            Địa chỉ
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Số điện thoại
+        </th>
+        <th>
+            Mã đơn
+        </th>
+        <th>
+            Ngày Đặt
+        </th>
+        <th>
+            Ngày giao
+        </th>
+        <th>
+            Tình trạng giao hàng
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhachHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoDienThoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDonDatHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayDat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayGiaoDuKien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TinhTrangGiaoHang)
+            </td>
+            <td>
+                @Html.ActionLink("Chi Tiết", "Details", new { id = item.MaDonDatHang }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="dlink">
+    <center>
+        Trang @(Model.PageCount<Model.PageNumber ? 0:Model.PageNumber)/@Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </center>
+</div>

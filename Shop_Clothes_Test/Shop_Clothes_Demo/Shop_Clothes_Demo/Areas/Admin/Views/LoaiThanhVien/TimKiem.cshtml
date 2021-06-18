@@ -1,12 +1,12 @@
 ﻿@using PagedList.Mvc
-@model PagedList.IPagedList<Shop_Clothes_Demo.Models.NhomMua>
+@model PagedList.IPagedList<Shop_Clothes_Demo.Models.LoaiThanhVien>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
 }
 
-@using (Html.BeginForm("GetKey", "NhomMua", FormMethod.Post, new { @class = "input" }))
+@using (Html.BeginForm("GetKey", "LoaiThanhVien", FormMethod.Post, new { @class = "input" }))
 {
     <div class=" form-group">
         <div class="col-md-10">
@@ -19,13 +19,19 @@
 }
 <br />
 <br />
-<br/>
+<p>
+    @Html.ActionLink("Quay Lại", "Index", null, new { @class = "btn btn-primary" })
+</p>
+<br />
 <div class="col-md-6">
     <h2>Nhóm Mua</h2><br />
     <table class="table">
         <tr>
             <th>
-                Tên Nhóm
+                Tên Loại
+            </th>
+            <th>
+                Ưu Đãi
             </th>
             <th></th>
         </tr>
@@ -34,24 +40,27 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TenNhom)
+                    @Html.DisplayFor(modelItem => item.TenLoaiThanhVien)
                 </td>
                 <td>
-                    @Html.ActionLink("Sửa", "Edit", new { MaNhom = item.MaNhom }, new { @class = "btn btn-success" })
-                    <button id="btnXoa_@item.MaNhom" class="btn btn-danger">Xóa</button>
+                    @Html.DisplayFor(modelItem => item.UuDai)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.MaLoaiThanhVien }, new { @class = "btn btn-success" })
+                    <button id="btnXoa_@item.MaLoaiThanhVien" class="btn btn-danger">Xóa</button>
                     <link rel="stylesheet" href="~/Content/Login/css/style.css" type="text/css" media="all" />
-                    <div id="@item.MaNhom" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); z-index: 999; display: none;">
-                        @using (Html.BeginForm("Delete", "NhomMua", new { @mn = item.MaNhom }))
+                    <div id="@item.MaLoaiThanhVien" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); z-index: 999; display: none;">
+                        @using (Html.BeginForm("Delete", "LoaiThanhVien", new { @ltv = item.MaLoaiThanhVien }))
                         {
                             <section class="w3l-login">
                                 <div class="overlay">
                                     <div class="wrapper">
                                         <div class="form-section">
                                             <div style="clear:both; text-align:right; margin-bottom:0;">
-                                                <span id="Dong_@item.MaNhom" class="btn btn-success">X</span>
+                                                <span id="Dong_@item.MaLoaiThanhVien" class="btn btn-success">X</span>
                                                 <br />
                                             </div>
-                                            <h4>Bạn có muốn xóa: @item.TenNhom</h4>
+                                            <h4>Bạn có muốn xóa: @item.TenLoaiThanhVien</h4>
                                             <button type="submit" class="btn btn-primary theme-button mt-2" style="background-color:red">Xóa</button>
                                         </div>
                                     </div>
@@ -66,12 +75,12 @@
                 </td>
             </tr>
             <script type="text/javascript">
-                    $("#btnXoa_@item.MaNhom").click(function () {
-                        $("#@item.MaNhom").show();
+                    $("#btnXoa_@item.MaLoaiThanhVien").click(function () {
+                        $("#@item.MaLoaiThanhVien").show();
                     })
-                    $("#Dong_@item.MaNhom").click(function () {
+                    $("#Dong_@item.MaLoaiThanhVien").click(function () {
                         //$("#popup_login").css("display", "block");
-                        $("#@item.MaNhom").hide();
+                        $("#@item.MaLoaiThanhVien").hide();
                     })
             </script>
         }
@@ -86,7 +95,7 @@
 </div>
 <div class="col-md-6">
     <h2>Thêm Mới</h2><br />
-    @using (Html.BeginForm("Add", "NhomMua", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Add", "LoaiThanhVien", FormMethod.Post, new { @enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -94,8 +103,15 @@
             <div class="form-group">
                 <span class="control-label col-md-2">Tên Nhóm</span>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="TenNhom">
-                    <span style="color:red">@Html.Raw(Session["nhommua"] as string)</span>
+                    <input type="text" class="form-control" name="TenLoaiThanhVien">
+                    <span style="color:red">@Html.Raw(Session["Ltv"] as string)</span>
+                </div>
+                <br />
+                <span class="control-label col-md-2">Ưu Đãi</span>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="UuDai">
+                    <span style="color:red">@Html.Raw(Session["Ltv"] as string)</span>
+                    <br />
                 </div>
             </div>
 

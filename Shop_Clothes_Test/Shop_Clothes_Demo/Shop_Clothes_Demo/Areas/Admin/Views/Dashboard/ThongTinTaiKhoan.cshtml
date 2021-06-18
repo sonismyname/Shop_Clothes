@@ -5,63 +5,80 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2>ThongTinTaiKhoan</h2>
+<h2>Thông Tin Tài Khoản</h2>
 
 <div>
-    <h4>ThanhVien</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Tài Khoản: 
+            Tài Khoản:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TaiKhoan)
+            <input type="text" name="TaiKhoan" class="form-control" value="@Model.TaiKhoan" readonly>
         </dd>
 
         <dt>
-            Họ tên: 
+            <br />
+            Họ tên:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HoTen)
+            <br />
+            <input type="text" name="HoTen" class="form-control" value="@Model.HoTen" readonly>
         </dd>
 
         <dt>
+            <br />
             Số điện thoại:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SoDienThoai)
+            <br />
+            <input type="text" name="SoDienThoai" class="form-control" value="@Model.SoDienThoai" readonly>
         </dd>
 
         <dt>
+            <br />
             Địa chỉ:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DiaChi)
+            <br />
+            <input type="text" name="DiaChi" class="form-control" value="@Model.DiaChi" readonly>
         </dd>
-
         <dt>
+            <br />
             Email:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Email)
+            <br />
+            <input type="text" name="Email" class="form-control" value="@Model.Email" readonly>
         </dd>
 
         <dt>
+            <br />
             Loại thành viên:
         </dt>
 
         <dd>
-            Quản lý
+            <br/>
+            <input type="text" name="ltv" class="form-control" value="Quản Lý" / readonly>
         </dd>
 
+        <dt>
+            
+        </dt>
+
+        <dd>
+            <br/><br/>
+            @Html.ActionLink("Đổi Mật Khẩu", "DoiMatKhau", new { }, new { @class = "btn btn-success" })       @Html.ActionLink("Quay Lại", "Index", null, new { @class = "btn btn-default" })     @Html.ActionLink("Đăng Xuất", "SignOut", null, new { @class = "btn btn-danger" })
+        </dd>
     </dl>
 </div>
-<p>
-    
-    @Html.ActionLink("Chỉnh Sửa", "Edit", new { id = Model.MaThanhVien }, new { @class = "btn btn-success" })       @Html.ActionLink("Quay Lại", "Index", null, new { @class = "btn btn-default" })     @Html.ActionLink("Đăng Xuất", "SignOut", null, new { @class = "btn btn-danger" })
-</p>
+@*<p>
+    <cennter>
+        @Html.ActionLink("Đổi Mật Khẩu", "DoiMatKhau", new { }, new { @class = "btn btn-success" })       @Html.ActionLink("Quay Lại", "Index", null, new { @class = "btn btn-default" })     @Html.ActionLink("Đăng Xuất", "SignOut", null, new { @class = "btn btn-danger" })
+    </cennter>
+</p>*@

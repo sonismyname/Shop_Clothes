@@ -20,13 +20,18 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
             ThanhVien x = Session["admin"] as ThanhVien;
             if (x == null)
             {
-                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
+                
                 return RedirectToAction("Index", "../Intro/Index");
             }
             else
             {
                 int pageS = 5;
                 int pageN = (page ?? 1);
+
+                ViewBag.MLSP = new SelectList(db.LoaiSanPhams.OrderBy(n => n.TenLoaiSanPham), "MaLoaiSanPham", "TenLoaiSanPham");
+                ViewBag.MNSX = new SelectList(db.NhaSanXuats.OrderBy(n => n.TenNhaSanXuat), "MaNhaSanXuat", "TenNhaSanXuat");
+                ViewBag.MN = new SelectList(db.NhomMuas.OrderBy(n => n.TenNhom), "MaNhom", "TenNhom");
+
                 return View(spdao.LoadSanPhamAdmin(pageN, pageS));
 
             }
@@ -235,7 +240,6 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
             ThanhVien x = Session["admin"] as ThanhVien;
             if (x == null)
             {
-                /*Session["deny_access"] = "Hãy nhập thông tin tài khoản";*/
                 return RedirectToAction("Index", "../Intro/Index");
             }
             else
@@ -243,10 +247,41 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
                 return View(x);
             }
         }
+        public ActionResult DoiMatKhau(int? id)
+        {
+            return RedirectToAction("ThongTinTaiKhoan", "Dashboard");
+        }
         public ActionResult SignOut()
         {
             Session["admin"] = null;
             return RedirectToAction("Index", "../Intro/Index");
+        }
+        [HttpPost]
+        public ActionResult GetKey(string tukhoa, int Malsp, int Mansx, int Man, int Min, int Max)
+        {
+            return RedirectToAction("TimKiem", new { @tukhoa = tukhoa, @Malsp = Malsp, @Mansx = Mansx, @Man = Man, @Min = Min, @Max = Max });
+        }
+        [HttpGet]
+        public ActionResult TimKiem(int? page, string tukhoa, int Malsp, int Mansx, int Man, int Min, int Max)
+        {
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                int pageS = 5;
+                int pageN = (page ?? 1);
+                ViewBag.min = Min;
+                ViewBag.max = Max;
+
+                ViewBag.MLSP = new SelectList(db.LoaiSanPhams.OrderBy(n => n.TenLoaiSanPham), "MaLoaiSanPham", "TenLoaiSanPham");
+                ViewBag.MNSX = new SelectList(db.NhaSanXuats.OrderBy(n => n.TenNhaSanXuat), "MaNhaSanXuat", "TenNhaSanXuat");
+                ViewBag.MN = new SelectList(db.NhomMuas.OrderBy(n => n.TenNhom), "MaNhom", "TenNhom");
+
+                return View(spdao.timKiem(pageN, pageS, tukhoa, Malsp, Mansx, Man, Min, Max));
+            }
         }
     }
 

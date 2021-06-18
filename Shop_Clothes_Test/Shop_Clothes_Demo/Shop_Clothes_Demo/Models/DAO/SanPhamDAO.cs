@@ -88,5 +88,14 @@ namespace Shop_Clothes_Demo.Models.DAO
             var lst = db.Database.SqlQuery<SanPham>("Select * from SanPham where tensanpham like N'%"+name+"%'");
             return lst;
         }
+        public IEnumerable<SanPhamDTO> timKiem(int Pagenum, int Pagesiz, string tukhoa, int Malsp, int Mansx, int Man, int Min, int Max)
+        {
+           
+            var lst = db.Database.SqlQuery<SanPhamDTO>("select MaSanPham , TenSanPham, DonGia, NgayCapNhat, HinhAnh, SoLuongTon, TenNhaSanXuat, TenLoaiSanPham, TenNhom " +
+            "from SanPham sp, LoaiSanPham lp, NhaSanXuat nsx, NhomMua nm " +
+            "where sp.MaLoaiSanPham = lp.MaLoaiSanPham and sp.MaNhaSanXuat = nsx.MaNhaSanXuat and sp.MaNhom = nm.MaNhom and sp.TenSanPham like N'%"+tukhoa+"%' and sp.MaLoaiSanPham = "+Malsp+ " and sp.MaNhaSanXuat = "+Mansx+" and sp.MaNhom = "+Man+" and sp.DonGia > "+Min+" and sp.DonGia < "+Max+" ")
+                .ToPagedList<SanPhamDTO>(Pagenum, Pagesiz);
+            return lst;
+        }
     }
 }

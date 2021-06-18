@@ -166,5 +166,24 @@ namespace Shop_Clothes_Demo.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", "LoaiSanPham");
         }
+        public ActionResult GetKey(string tukhoa)
+        {
+            return RedirectToAction("TimKiem", new { @tukhoa = tukhoa});
+        }
+        [HttpGet]
+        public ActionResult TimKiem(int? page, string tukhoa)
+        {
+            ThanhVien x = Session["admin"] as ThanhVien;
+            if (x == null)
+            {
+                return RedirectToAction("Index", "../Intro/Index");
+            }
+            else
+            {
+                int pageS = 5;
+                int pageN = (page ?? 1);
+                return View(lspdao.TimKiemLoaiSanPham(pageN, pageS, tukhoa));
+            }
+        }
     }
 }

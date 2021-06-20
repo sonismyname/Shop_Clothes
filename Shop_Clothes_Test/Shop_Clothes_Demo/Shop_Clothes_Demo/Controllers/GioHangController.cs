@@ -68,7 +68,16 @@ namespace Shop_Clothes_Demo.Controllers
         [HttpPost]
         public ActionResult ThemGioHang(FormCollection f, int MaSanPham, string strURL)
         {
-            int So = Convert.ToInt32(f["SoLuong"]);
+            int So;
+            try
+            {
+                So = Convert.ToInt32(f["SoLuong"]);
+            }
+            catch
+            {
+                So = 1;
+            }
+            
             string size =f["_size"];
             string sizeF = KichThuoc(Convert.ToInt32(size));
             SanPham sp = db.SanPhams.SingleOrDefault(n => n.MaSanPham == MaSanPham);
@@ -153,10 +162,10 @@ namespace Shop_Clothes_Demo.Controllers
         {
             ViewBag.TongTien = TinhTien();
             List<ItemGioHang> lst = getGioHang();
-            if(lst.Count<=0)
+            /*if(lst.Count<=0)
             {
-                return RedirectToAction("Index","Intro");
-            }    
+                return RedirectToAction("Index", "Intro");
+            }*/
             return View(lst);
         }
         public ActionResult GioHangPartial()
@@ -176,8 +185,15 @@ namespace Shop_Clothes_Demo.Controllers
             List<ItemGioHang> lst = Session["GioHang"] as List<ItemGioHang>;
 
             var item = from n in lst where n.MaSP==MaSanPham && n.Size==size select n;
+            int SL;
+            try 
+            {
+                SL = Convert.ToInt32(f["SoLuongSP"]);
+            } catch
+            {
+                SL = 1;
+            }
             
-            int SL = Convert.ToInt32(f["SoLuongSP"]);
             //update so luong
             ItemGioHang it = item.FirstOrDefault();
             it.SoLuong = SL;
@@ -187,6 +203,11 @@ namespace Shop_Clothes_Demo.Controllers
         }
         public ActionResult ThanhToan()
         {
+            List<ItemGioHang> lst = getGioHang();
+            if (lst.Count <= 0)
+            {
+                return RedirectToAction("XemGioHang", "GioHang");
+            }
             return View();
         }
         [HttpPost]

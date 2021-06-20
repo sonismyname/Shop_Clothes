@@ -27,9 +27,9 @@
         <th>
             @Html.DisplayNameFor(model => model.MaKhachHang)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.UuDai)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -50,12 +50,19 @@
         <td>
             @Html.DisplayFor(modelItem => item.MaKhachHang)
         </td>
-        <td>
+       @* <td>
             @Html.DisplayFor(modelItem => item.UuDai)
-        </td>
-        <td>    
-            @Html.ActionLink("Chi Tiết", "ChiTietDonHang", new { MaDonDatHang = item.MaDonDatHang }, new { @class= "btn btn-success" }) 
-        </td>
+        </td>*@
+    <td>
+        @Html.ActionLink("Chi Tiết", "ChiTietDonHang", new { MaDonDatHang = item.MaDonDatHang }, new { @class = "btn btn-success" })
+        @{
+            if (item.TinhTrangGiaoHang.Equals("Đang giao"))
+            {
+                @Html.ActionLink("Hủy đơn", "HuyDonHang", new { MaDonDatHang = item.MaDonDatHang }, new { @class = "btn btn-danger" })
+            }
+        }
+
+    </td>
     </tr>
 }
 

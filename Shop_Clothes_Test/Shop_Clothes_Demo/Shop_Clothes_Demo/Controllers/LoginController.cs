@@ -112,6 +112,37 @@ namespace Shop_Clothes_Demo.Controllers
             else
                 return RedirectToAction("Index", "Intro");
         }
+        public ActionResult HuyDonHang(int MaDonDatHang)
+        {
+            ThanhVien tv = Session["username"] as ThanhVien;
+            if (Session["username"] != null)
+            {
+                //hủy đơn cập nhật csdl
+                DonDatHang dh = db.DonDatHangs.Find(MaDonDatHang);
+                if(dh!=null)
+                {       
+                    //cập nhật số lượng hàng tồn
+                    ChiTietDonHangDAO daoCT = new ChiTietDonHangDAO();
+                    List<ChiTietDonHang> listCT = daoCT.ListDH(MaDonDatHang);
+                    foreach (ChiTietDonHang item in listCT)
+                    {
+                        SanPham sp = db.SanPhams.Find(item.MaSanPham);
+                        if (sp != null)
+                        {
+                            sp.SoLuongMua -= item.SoLuong;
+                            sp.SoLuongTon += item.SoLuong;
+                        }
+                        db.SaveChanges();
+                    }
+                    db.DonDatHangs.Remove(dh);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("ListDonHang", "Login", new { MaThanhVien = tv.MaThanhVien }) ;
+            }
+            else
+                return RedirectToAction("Index", "Intro");
+            
+        }
         [HttpPost]
         public ActionResult CapNhat(FormCollection f)
         {
@@ -120,9 +151,13 @@ namespace Shop_Clothes_Demo.Controllers
 
         public ActionResult ListDonHang(int MaThanhVien)
         {
-            DonDatHangDAO dao = new DonDatHangDAO();
+            if (Session["username"] != null)
+            {
+                DonDatHangDAO dao = new DonDatHangDAO();
 
-            return View(dao.listDH(MaThanhVien));
+                return View(dao.listDH(MaThanhVien));
+            }
+            return RedirectToAction("Index", "Intro");
         }
 
         public ActionResult ChiTietDonHang(int MaDonDatHang)
